@@ -22,6 +22,10 @@
     display: flex;
 }
 
+#popup h4{
+    margin-top: 10px;
+}
+
 #popup-background {
     position: fixed;
     top: 0;
