@@ -1,6 +1,7 @@
 const createProductCart = (product, id) => {
 
     const address = getState('address');
+    console.log('address',address);
     const retailerTypes = { "onDemand": "Get it now", "engraved": "Engraving Available", "shipping": "Get it Shipped" };
     const productContent = document.querySelector(`[liquid-id="${id}"]`);
     productContent.innerHTML = '';
@@ -8,7 +9,7 @@ const createProductCart = (product, id) => {
     productCard.href = `/pdp?id=${id}`;
     productCard.classList.add('product-card');
 
-    productCard.innerHTML = `
+    productHTML = `
              <div class="product-image" style='background-image: url(${product.images[0].slice(6,)})' ></div>
              <b>${product.name}</b>
              ${address ?
@@ -23,6 +24,8 @@ const createProductCart = (product, id) => {
                     `<p class="product-no-address">Insert Address to Check Availability</p>`
                 }
             `;
+            
+    productCard.innerHTML = productHTML;
     productContent.append(productCard);
 }
 
