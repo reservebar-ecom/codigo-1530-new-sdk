@@ -22,11 +22,15 @@ const groupingIds = [...liquidIdEls].map(el => el.getAttribute('liquid-id'));
 
     const liquid = await new Liquid({ clientId: '81751648f545a97274df4e2782d01a70' });
     window.liquid = liquid;
-    
+
+    setState({ name: 'grouping_ids', value: groupingIds || null });
+
     const products = await liquid.product({
         ids: groupingIds,
         shipAddress: '120 Nassau Street, Brooklyn, NY 11201, USA'
     });
+    
+    setState({ name: 'products', value: products || null });
 
     console.log("# products", products);
 
