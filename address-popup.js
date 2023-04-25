@@ -17,6 +17,13 @@ window.addEventListener('address', async function (e) {
     addressOptions.forEach(el => el.classList.remove('visible'));
 });
 
+// Address button / open
+
+const addressButton = document.querySelector('#popup-button');
+addressButton.onclick = () => {
+    
+}
+
 // Address input
 const addressInput = document.querySelector('#address-input');
 const addressOptions = [...document.querySelectorAll('.address-option')];

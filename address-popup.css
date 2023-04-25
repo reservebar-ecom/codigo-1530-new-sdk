@@ -1,3 +1,34 @@
-.open-address-popup {
-    padding: 1rem;
+.popup-button-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 4rem;
+}
+
+#popup {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+}
+
+#popup-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    backdrop-filter: blur(1px) brightness(80%);
+}
+
+#popup-modal {
+    padding: 2rem;
+    background: white;
+    box-shadow: 0 .125rem .25rem rgba(0,0,0,.075)!important;
 }
