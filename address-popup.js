@@ -1,5 +1,4 @@
-// Address button / open
-
+// Address Modal
 const addressOpenButton = document.querySelector('#popup-open');
 const addressCloseButton = document.querySelector('#popup-close');
 const addressModal = document.querySelector('#popup');
@@ -87,6 +86,7 @@ window.addEventListener('address', async function (e) {
     const address = getState('address');
     const addressInput = document.querySelector('#address-input');
     addressInput.value = address.description;
+    addressOpenButton.innerHTML = address.description;
 
     const addressObj = await liquid.address({ placeId: address.placeId });
     const groupingIds = getState('grouping_ids');
