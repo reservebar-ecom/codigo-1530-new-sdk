@@ -29,8 +29,6 @@ const createProductCart = (product, id) => {
 const liquidIdEls = document.querySelectorAll('[liquid-id]');
 const groupingIds = [...liquidIdEls].map(el => el.getAttribute('liquid-id'));
 
-
-
 // PRODUCTS Event Listener
 window.addEventListener('products', async function (e) {
     const products = getState('products');
@@ -53,7 +51,7 @@ window.addEventListener('products', async function (e) {
 
     const products = await liquid.product({
         ids: groupingIds,
-        shipAddress: address?.description || '120 Nassau Street, Brooklyn, NY 11201, USA'
+        shipAddress: '120 Nassau Street, Brooklyn, NY 11201, USA'
     });
 
     setState({ name: 'products', value: products || null });

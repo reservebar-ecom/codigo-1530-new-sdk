@@ -4,7 +4,7 @@
 
 .product-grouping {
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-around;
     flex-wrap: wrap;
     padding-bottom: 4rem;
     border-bottom: 1px solid lightgray;
