@@ -1,22 +1,3 @@
-
-// ADDRESS Event Listener
-window.addEventListener('address', async function (e) {
-    const address = getState('address');
-    const addressInput = document.querySelector('#address-input');
-    addressInput.value = address.description;
-
-    const addressObj = await liquid.address({ placeId: address.placeId });
-    const groupingIds = getState('grouping_ids');
-    const products = await liquid.product({
-        ids: groupingIds,
-        latitude: addressObj.latitude,
-        longitude: addressObj.longitude
-    });
-
-    setState({ name: 'products', value: products || null });
-    addressOptions.forEach(el => el.classList.remove('visible'));
-});
-
 // Address button / open
 
 const addressOpenButton = document.querySelector('#popup-open');
@@ -98,4 +79,24 @@ addressOptions.forEach(addressOption => {
             }
         });
     }
+});
+
+
+// ADDRESS Event Listener
+window.addEventListener('address', async function (e) {
+    const address = getState('address');
+    const addressInput = document.querySelector('#address-input');
+    addressInput.value = address.description;
+
+    const addressObj = await liquid.address({ placeId: address.placeId });
+    const groupingIds = getState('grouping_ids');
+    const products = await liquid.product({
+        ids: groupingIds,
+        latitude: addressObj.latitude,
+        longitude: addressObj.longitude
+    });
+
+    setState({ name: 'products', value: products || null });
+    addressOptions.forEach(el => el.classList.remove('visible'));
+    closeAddressModal();
 });
