@@ -25,10 +25,12 @@
     width: 100vw;
     height: 100vh;
     backdrop-filter: blur(1px) brightness(80%);
+    z-index: 998;
 }
 
 #popup-modal {
     padding: 2rem;
     background: white;
     box-shadow: 0 .125rem .25rem rgba(0,0,0,.075)!important;
+    z-index: 999;
 }
