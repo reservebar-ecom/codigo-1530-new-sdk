@@ -12,6 +12,7 @@ const createProductCart = (product, id) => {
              ${product.availability.map(av =>
         `<p class="product-availability">✓ ${retailerTypes[av]}</p>`
     ).join('')}
+            ${product.availability.length === 0 && '<p class="product-unavailable">Unavailable Product</p>'}
             `;
     productContent.append(productCard);
 }

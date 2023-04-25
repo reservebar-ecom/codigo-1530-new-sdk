@@ -41,3 +41,9 @@
     background-repeat: no-repeat;
     background-size: cover;
 }
+
+.product-unavailable {
+    text-transform: uppercase;
+    color: brown;
+    font-size: 12px;
+}
