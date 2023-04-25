@@ -12,7 +12,7 @@ const createProductCart = (product, id) => {
              ${product.availability.map(av =>
         `<p class="product-availability">✓ ${retailerTypes[av]}</p>`
     ).join('')}
-            ${product.availability.length === 0 && '<p class="product-unavailable">Unavailable Product</p>'}
+            ${product.availability.length === 0 ? '<p class="product-unavailable">Unavailable Product</p>' : ''}
             `;
     productContent.append(productCard);
 }
@@ -40,13 +40,13 @@ window.addEventListener('products', async function (e) {
 
     setState({ name: 'grouping_ids', value: groupingIds || null });
 
-    // const address = getState({ name: 'products', value: products || null });
+    const address = getState('address');
 
     const products = await liquid.product({
         ids: groupingIds,
-        shipAddress: '120 Nassau Street, Brooklyn, NY 11201, USA'
+        shipAddress: address?.description || '120 Nassau Street, Brooklyn, NY 11201, USA'
     });
 
     setState({ name: 'products', value: products || null });
 })();
-
+  

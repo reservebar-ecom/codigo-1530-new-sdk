@@ -80,7 +80,6 @@ addressOptions.forEach(addressOption => {
     }
 });
 
-
 // ADDRESS Event Listener
 window.addEventListener('address', async function (e) {
     const address = getState('address');
