@@ -24,6 +24,8 @@ addressModalBg.onclick = () => {
     closeAddressModal();
 }
 
+
+
 // Address input
 const addressInput = document.querySelector('#address-input');
 const addressOptions = [...document.querySelectorAll('.address-option')];
@@ -31,6 +33,9 @@ const addressOptions = [...document.querySelectorAll('.address-option')];
 const address = getState('address');
 if (address) {
     addressInput.value = address.description;
+    addressOpenButton.innerHTML = address.description;
+} else {
+    openAddressModal();
 }
 
 let isTypingAddress = false;
