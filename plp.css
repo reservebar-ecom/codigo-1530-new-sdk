@@ -47,3 +47,9 @@
     color: brown;
     font-size: 12px;
 }
+
+.product-no-address {
+    text-transform: uppercase;
+    color: slategray;
+    font-size: 12px;
+}

@@ -1,4 +1,6 @@
 const createProductCart = (product, id) => {
+
+    const address = getState('address');
     const retailerTypes = { "onDemand": "Get it now", "engraved": "Engraving Available", "shipping": "Get it Shipped" };
     const productContent = document.querySelector(`[liquid-id="${id}"]`);
     productContent.innerHTML = '';
@@ -9,10 +11,17 @@ const createProductCart = (product, id) => {
     productCard.innerHTML = `
              <div class="product-image" style='background-image: url(${product.images[0].slice(6,)})' ></div>
              <b>${product.name}</b>
-             ${product.availability.map(av =>
-        `<p class="product-availability">✓ ${retailerTypes[av]}</p>`
-    ).join('')}
-            ${product.availability.length === 0 ? '<p class="product-unavailable">Unavailable Product</p>' : ''}
+             ${address ?
+                    ` 
+                        ${product.availability.map(av =>
+                        `<p class="product-availability">✓ ${retailerTypes[av]}</p>`
+                    ).join('')}
+                                ${product.availability.length === 0 ? '<p class="product-unavailable">Unavailable Product</p>' : ''}
+                        `
+                    :
+
+                    `<p class="product-no-address">Insert Address to Check Availability</p>`
+                }
             `;
     productContent.append(productCard);
 }
@@ -49,4 +58,3 @@ window.addEventListener('products', async function (e) {
 
     setState({ name: 'products', value: products || null });
 })();
-  
