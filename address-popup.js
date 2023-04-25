@@ -22,6 +22,7 @@ window.addEventListener('address', async function (e) {
 const addressOpenButton = document.querySelector('#popup-open');
 const addressCloseButton = document.querySelector('#popup-close');
 const addressModal = document.querySelector('#popup');
+const addressModalBg = document.querySelector('#popup-background');
 
 const closeAddressModal = () => {
     addressModal.classList.remove('active');
@@ -36,6 +37,10 @@ addressOpenButton.onclick = () => {
 }
 
 addressCloseButton.onclick = () => {
+    closeAddressModal();
+}
+
+addressModalBg.onclick = () => {
     closeAddressModal();
 }
 
