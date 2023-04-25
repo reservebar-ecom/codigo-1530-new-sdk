@@ -7,7 +7,7 @@
 }
 
 #popup {
-    display: flex;
+    display: none;
     justify-content: center;
     align-items: center;
 
@@ -16,6 +16,10 @@
     left: 0;
     width: 100vw;
     height: 100vh;
+}
+
+#popup.active {
+    display: flex;
 }
 
 #popup-background {
@@ -75,3 +79,25 @@
     visibility:visible;
     opacity: 1;
  }
+
+ .popup-close-container {
+    display: flex;
+    width: 100%;
+    flex-direction: row-reverse;
+ }
+
+ #popup-close {
+    border: none;
+    background-color: none;
+    opacity: .7;
+    transition: all .2s ease;
+ }
+
+ #popup-close:hover {
+    opacity: .9;
+ }
+
+ #popup-close:active {
+    opacity: 1;
+ }
+
