@@ -82,14 +82,15 @@ button {
  
  .variant-option h5{
     margin: 0;
-    font-size: 1rem;
+    font-size: 1.25rem;
     text-transform: uppercase;
-    margin-left: 1.5rem;
+    margin-left: 1rem;
     color: rgb(62, 77, 77);
  }
  
  .variant-option span {
     font-size: 1.5rem;
+    font-family: 'Barlow Semi Condensed';
  }
  
  #atc {
