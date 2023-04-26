@@ -123,11 +123,11 @@ button {
  
  
  .qty-selector {
-    display: none;
+    display: none !important;
  }
  
  .qty-selector.enabled {
-    display: block;
+    display: block !important;
  }
  
  #qty-selector-container select {
