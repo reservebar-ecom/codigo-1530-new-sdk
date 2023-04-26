@@ -130,6 +130,9 @@ button {
     margin-right: .5rem;
     cursor: pointer;
     width: 80px;
+    -webkit-appearance: listbox !important;
+    appearance: listbox !important;
+    padding: 0.45rem;
  }
  
  #size-selector {
@@ -139,6 +142,9 @@ button {
     margin-right: .5rem;
     cursor: pointer;
     width: 200px;
+    -webkit-appearance: listbox !important;
+    appearance: listbox !important;
+    padding: 0.45rem;
  }
  
  #checkout {
