@@ -16,7 +16,7 @@ const quantitySelectorHTML = ({ product, variantId, isActive }) => {
     const inStockQuantity = variant.inStock;
 
     return `
-    <select class="qty-selector ${isActive && 'enabled'}" variant-id="${variantId}">
+    <select class="qty-selector uk-button ${isActive && 'enabled'}" variant-id="${variantId}">
         ${[...Array(inStockQuantity).keys()].map(index =>
         `<option value="${index + 1}">${index + 1}</option>`
     ).join('')}
