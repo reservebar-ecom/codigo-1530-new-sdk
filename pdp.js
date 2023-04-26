@@ -292,7 +292,7 @@ engravingEdit.onclick = () => {
 }
 
 // Address input
-const address = getState('address');
+
 if (address) {
     addressInput.value = address.description;
 }
