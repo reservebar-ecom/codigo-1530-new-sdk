@@ -1,0 +1,124 @@
+<!-- Liquid SDK -->
+<script type="text/javascript" src="https://sdk.liquidcloud.app/liquid-sdk.js"></script>
+<link rel="stylesheet" href="https://reservebar-ecom.github.io/codigo-1530-new-sdk/pdp.css">
+<link rel="stylesheet" href="https://reservebar-ecom.github.io/codigo-1530-new-sdk/cart.css">
+<link rel="stylesheet" href="https://reservebar-ecom.github.io/codigo-1530-new-sdk/address-popup.css">
+
+<div class="header-wrapper">
+    <h1>Products' Page</h1>
+    <button id="open-cart"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+            class="bi bi-cart2" viewBox="0 0 16 16">
+            <path
+                d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z" />
+        </svg><span class="cart-num-items"></span></button>
+</div>
+
+ <!-- Address Input  -->
+<div class="popup-button-wrapper">
+    <button class="el-content uk-button uk-button-default" id="popup-open">Enter Delivery Address</button>
+</div>
+
+<!-- Address Modal  -->
+<div id="popup">
+    <div id="popup-background"></div>
+    <div id="popup-modal">
+        <div class="popup-close-container">
+            <button id="popup-close">✕</button>
+        </div>
+        <h4>Enter your delivery address</h4>
+        <div id="address-input-container">
+            <input type="text" placeholder="Enter your address" id="address-input" />
+            <button class="address-option"></button>
+            <button class="address-option"></button>
+            <button class="address-option"></button>
+            <button class="address-option"></button>
+            <button class="address-option"></button>
+        </div>
+    </div>
+</div>
+
+
+ <!-- PDP content  -->
+<div id="pdp">
+    <div class="img">
+        <img id="product-img" src="">
+    </div>
+    <div id="product-info">
+        <h2 id="product-name"></h2>
+        <div id="variants"></div>
+        <div id="engraving">
+            <div class="engraving-header">
+                <input type="checkbox" id="engraving-checkbox">
+                <label for="engraving-checkbox">Engrave my bottle</label>
+            </div>
+            <div class="engraving-body">
+                <div class="engraving-inputs">
+                    <input type="text" maxlength="16" id="input-line-1" placeholder="Line 1">
+                    <input type="text" maxlength="16" id="input-line-2" placeholder="Line 2">
+                    <input type="text" maxlength="16" id="input-line-3" placeholder="Line 3">
+                    <input type="text" maxlength="16" id="input-line-4" placeholder="Line 4">
+                </div>
+                <div class="engraving-atc">
+                    <button id="engraving-cancel">
+                        Cancel
+                    </button>
+                    <button id="engraving-edit" disabled>Edit</button>
+                    <button id="engraving-save" disabled>
+                        Save
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div id="atc-container">
+            <select id="size-selector" onchange="handleSizeSelector(this.value)"></select>
+            <div id="qty-selector-container"></div>
+            <button id="atc">Add to Cart</button>
+        </div>
+    </div>
+</div>
+<div id="product-description"></div>
+
+ <!-- CART  -->
+<div id="cart">
+    <div id="cart-container" class="closed">
+        <div id="cart-top">
+            <h3>Cart</h3>
+            <button id="close-cart">✖</button>
+        </div>
+        <div id="cart-items"></div>
+        <div id="cart-bottom">
+            <div class="cart-subtotal-info">
+                <div class="cart-subtotal-items">
+                    <h3>Subtotal: </h3>
+                    <h3 style="margin:auto .5rem;" class="cart-num-items"></h3>
+                    <h3>item(s)</h3>
+                </div>
+                <h3 id="cart-subtotal"></h3>
+            </div>
+            <button id="checkout">
+                Checkout
+            </button>
+        </div>
+    </div>
+    <div id="cart-backdrop"></div>
+</div>
+
+
+ <!-- LOADER  -->
+<div id="loader">
+    <div class="lds-roller">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+</div>
+
+<script type="text/javascript" src="https://reservebar-ecom.github.io/codigo-1530-new-sdk/sdk.js"></script>
+<script type="text/javascript" src="https://reservebar-ecom.github.io/codigo-1530-new-sdk/cart.js"></script>
+<script type="text/javascript" src="https://reservebar-ecom.github.io/codigo-1530-new-sdk/pdp.js"></script>
+<script type="text/javascript" src="https://reservebar-ecom.github.io/codigo-1530-new-sdk/address-popup.js"></script>
