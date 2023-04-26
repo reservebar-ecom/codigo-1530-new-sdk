@@ -200,7 +200,7 @@ const loadLiquid = async () => {
     // Grouping ID
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
-    const groupingId = urlParams.get('id');
+    const groupingId = //urlParams.get('id');
     setState({ name: 'grouping_id', value: groupingId });
 
     // Address
@@ -292,9 +292,6 @@ engravingEdit.onclick = () => {
 }
 
 // Address input
-const addressInput = document.querySelector('#address-input');
-const addressOptions = [...document.querySelectorAll('.address-option')];
-
 const address = getState('address');
 if (address) {
     addressInput.value = address.description;
