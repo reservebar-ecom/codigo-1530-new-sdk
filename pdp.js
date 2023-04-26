@@ -194,7 +194,7 @@ const addToCart = async () => {
 const loadLiquid = async () => {
 
     // Initialize Liquid
-    const liquid = await new Liquid({ clientId: '3874058558b6dd82dc652e770b6b689e' });
+    const liquid = await new Liquid({ clientId: '81751648f545a97274df4e2782d01a70' });
     window.liquid = liquid;
 
     // Grouping ID
