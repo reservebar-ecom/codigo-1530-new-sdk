@@ -153,17 +153,6 @@ window.addEventListener('cart', function (e) {
 // Set onclick function 
 document.querySelector('#close-cart').onclick = closeCart;
 document.querySelector('#cart-backdrop').onclick = closeCart;
-document.querySelector('#open-cart').onclick = () => {
-    const cartDrawer = document.querySelector('#cart-container');
-    const isCartOpen = getState('cart_open')
-
-    if (isCartOpen) {
-        closeCart();
-    } else {
-        openCart();
-    }
-}
-
 document.querySelector('#checkout').onclick = async () => {
     await checkout()
 }
