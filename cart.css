@@ -113,18 +113,20 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    font-family: "Barlow Semi Condensed";
  }
  
 .cart-qty-wrapper select {
    width: 100px;
+   font-family: "Barlow Semi Condensed";
 }
 
  #cart-top {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 1rem;
     margin: 1rem;
+    font-size: 2rem;
  }
 
  #cart-top h3 {
@@ -159,11 +161,22 @@
  .cart-subtotal-info {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+ }
+
+ .cart-subtotal-info h3{
+   margin: 0 !important;
  }
  
  .cart-subtotal-items {
     display: flex;
+    align-items: center;
  }
+
+ .cart-subtotal-items h3{
+   margin: 0 !important;
+ }
+ 
  
  .cart-item-engraving {
     background-color: rgba(112, 128, 144, 0.172);
