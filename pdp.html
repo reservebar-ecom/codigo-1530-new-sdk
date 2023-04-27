@@ -5,7 +5,6 @@
 <link rel="stylesheet" href="https://reservebar-ecom.github.io/codigo-1530-new-sdk/address-popup.css">
 
 <div class="header-wrapper">
-    <h1>Products' Page</h1>
     <button id="open-cart"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
             class="bi bi-cart2" viewBox="0 0 16 16">
             <path
@@ -36,7 +35,6 @@
         </div>
     </div>
 </div>
-
 
  <!-- PDP content  -->
 <div id="pdp">
@@ -70,9 +68,9 @@
             </div>
         </div>
         <div id="atc-container">
-            <select id="size-selector" onchange="handleSizeSelector(this.value)"></select>
+            <select class="uk-button" id="size-selector" onchange="handleSizeSelector(this.value)"></select>
             <div id="qty-selector-container"></div>
-            <button id="atc">Add to Cart</button>
+            <button class="el-content uk-button uk-button-default" id="atc">Add to Cart</button>
         </div>
     </div>
 </div>
@@ -83,7 +81,7 @@
     <div id="cart-container" class="closed">
         <div id="cart-top">
             <h3>Cart</h3>
-            <button id="close-cart">✖</button>
+            <button id="close-cart">✕</button>
         </div>
         <div id="cart-items"></div>
         <div id="cart-bottom">
@@ -95,14 +93,13 @@
                 </div>
                 <h3 id="cart-subtotal"></h3>
             </div>
-            <button id="checkout">
+            <button class="el-content uk-button uk-button-default" id="checkout">
                 Checkout
             </button>
         </div>
     </div>
     <div id="cart-backdrop"></div>
 </div>
-
 
  <!-- LOADER  -->
 <div id="loader">
@@ -120,5 +117,5 @@
 
 <script type="text/javascript" src="https://reservebar-ecom.github.io/codigo-1530-new-sdk/sdk.js"></script>
 <script type="text/javascript" src="https://reservebar-ecom.github.io/codigo-1530-new-sdk/cart.js"></script>
-<script type="text/javascript" src="https://reservebar-ecom.github.io/codigo-1530-new-sdk/pdp.js"></script>
 <script type="text/javascript" src="https://reservebar-ecom.github.io/codigo-1530-new-sdk/address-popup.js"></script>
+<script type="text/javascript" src="https://reservebar-ecom.github.io/codigo-1530-new-sdk/pdp.js"></script>

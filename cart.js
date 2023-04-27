@@ -36,6 +36,7 @@ const cartItemHTML = (cartItem) => {
                     <h5>${cartItem.productGrouping.name}</h5>
                     <button class="remove-item" onclick="deleteCartItem(${cartItem.product.id})">✕</button>
                 </div>
+                <small>${cartItem.deliveryExpectation}</small>
                 <small>${cartItem.product.volume.toUpperCase()} ${cartItem.product.containerType}</small> 
                 <div class="cart-qty-wrapper"> 
                     <select onchange="updateCartItem({variantId: ${cartItem.product.id}, quantity: this.value})" name="qty" id="qty-${cartItem.identifier}">
@@ -46,7 +47,6 @@ const cartItemHTML = (cartItem) => {
                     </select>
                     $${cartItem.product.price}
                 </div>
-                <small>${cartItem.deliveryExpectation}</small>
             </div>
 
             ${cartItem.itemOptions ?

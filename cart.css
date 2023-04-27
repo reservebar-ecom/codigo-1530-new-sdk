@@ -109,6 +109,10 @@
     width: calc( 100% - 100px);
  }
  
+ .cart-item-info small:last-of-type {
+   font-size: .7rem;
+ }
+
  .cart-qty-wrapper {
     display: flex;
     justify-content: space-between;
@@ -140,6 +144,7 @@
 
  #cart-bottom h3 {
    font-family: "Barlow Semi Condensed" !important;
+   font-size: 1.125rem;
  }
  
  #checkout {
@@ -149,7 +154,7 @@
     text-transform: uppercase;
     cursor: pointer;
     transition: all .2s ease-in-out;
-    margin-bottom: 1rem;
+    margin: 1rem 0;
     font-weight: 600;
  }
  
@@ -166,6 +171,8 @@
 
  .cart-subtotal-info h3{
    margin: 0 !important;
+   font-size: 1.125rem;
+
  }
  
  .cart-subtotal-items {
@@ -174,10 +181,14 @@
  }
 
  .cart-subtotal-items h3{
-   margin: 0 !important;
+   margin: 0;
+ }
+
+ .cart-num-items {
+   margin: 0 .25rem;
  }
  
- 
+
  .cart-item-engraving {
     background-color: rgba(112, 128, 144, 0.172);
     width: 100%;

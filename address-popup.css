@@ -45,6 +45,10 @@
     width: 600px;
 }
 
+#popup-modal  h4{
+   text-align: center;
+}
+
 
 #address-input-container {
     display: flex;
@@ -54,6 +58,8 @@
     width: 100%;
     margin-bottom: -9rem;
     z-index: 99;
+    font-family: "Barlow Semi Condensed";
+   width: 600px;
     position: relative;
  }
 

@@ -45,6 +45,7 @@ button {
  #product-info {
     max-width: 600px;
     padding: 2rem;
+    padding-right: 8rem;
  }
  
  .img>img {
