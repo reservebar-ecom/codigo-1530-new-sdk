@@ -175,9 +175,14 @@ updateCartDependencies(cart);
 
 // Overwrite Codigo's Cart
 
-const cartIcons = document.querySelectorAll('.kart');
+addEventListener("DOMContentLoaded", (event) => {
 
-[...cartIcons].forEach(cartIcon => {
-    cartIcon.setAttribute('href','');
-    cartIcon.onclick = toggleCart;
+    const cartIcons = document.querySelectorAll('.kart');
+    
+    setTimeout(()=>{
+        [...cartIcons].forEach(cartIcon => {
+            cartIcon.removeAttribute("href");
+            cartIcon.onclick = toggleCart;
+        })
+    }, 500)
 });
