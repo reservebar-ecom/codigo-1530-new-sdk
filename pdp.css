@@ -31,8 +31,9 @@ button {
  
  #product-name {
     text-transform: uppercase;
-    letter-spacing: 2px;
+    letter-spacing: -2px;
     text-align: center;
+    font-size: 2rem;
  }
  
  .header-wrapper {
@@ -90,6 +91,7 @@ button {
  .variant-option span {
     font-size: 1.5rem;
     font-family: 'Barlow Semi Condensed';
+    margin-right: 1rem;
  }
 
  .variant-id {
@@ -218,6 +220,7 @@ button {
    text-transform: uppercase;
    color: gray;
    font-size: .85rem;
+   margin-top: -.25rem;
  }
   
   .lds-roller {

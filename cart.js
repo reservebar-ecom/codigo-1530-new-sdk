@@ -34,7 +34,7 @@ const cartItemHTML = (cartItem) => {
             <div class="cart-item-info">
                 <div class="cart-item-top">
                     <h5>${cartItem.productGrouping.name}</h5>
-                    <button class="remove-item" onclick="deleteCartItem(${cartItem.product.id})">✖</button>
+                    <button class="remove-item" onclick="deleteCartItem(${cartItem.product.id})">✕</button>
                 </div>
                 <small>${cartItem.product.volume.toUpperCase()} ${cartItem.product.containerType}</small> 
                 <div class="cart-qty-wrapper"> 
