@@ -63,6 +63,14 @@
     position: relative;
  }
 
+ #address-input {
+   border: 2px solid black;
+   border-radius: 0;
+   padding: .5rem 1rem;
+   width: 400px;
+   text-transform: uppercase;
+}
+
 .address-option {
     width: 100%;
     font-family: "Barlow Semi Condensed";
