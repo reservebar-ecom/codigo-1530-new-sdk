@@ -92,6 +92,15 @@ const isCartOpen = () => {
     return isOpen == 'true'
 }
 
+const toggleCart = () => {
+    const isOpen = isCartOpen();
+    if(isOpen){
+        closeCart();
+    } else {
+        openCart();
+    }
+}
+
 const openCart = () => {
     const cartDrawer = document.querySelector('#cart-container');
     cartDrawer.classList.add('open');
@@ -162,3 +171,13 @@ document.querySelector('#checkout').onclick = async () => {
 // Load stored objects
 let cart = getState('cart');
 updateCartDependencies(cart);
+
+
+// Overwrite Codigo's Cart
+
+const cartIcons = document.querySelectorAll('.kart');
+
+[...cartIcons].forEach(cartIcon => {
+    cartIcon.setAttribute('href','');
+    cartIcon.onclick = toggleCart;
+});
