@@ -130,11 +130,11 @@
     justify-content: space-between;
     align-items: center;
     margin: 1rem;
-    font-size: 2rem;
  }
 
  #cart-top h3 {
    margin: 0;
+   font-size: 3rem;
 }
 
  #cart-bottom {
