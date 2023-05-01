@@ -201,18 +201,8 @@ const loadLiquid = async () => {
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
     const groupingId = 'GROUPING-741422'; //urlParams.get('id'); TODO: change it later
-    setState({ name: 'grouping_id', value: groupingId });
-
-    // Address
-    let address = getState('address');
-
-    // Get product
-    const products = await liquid.product({
-        ids: [groupingId],
-        shipAddress: address?.description
-    });
-
-    setState({ name: 'product', value: products[groupingId] });
+    setState({ name: 'grouping_ids', value: [groupingId] });
+    window.dispatchEvent(new Event('address'));
 }
 
 
@@ -292,7 +282,9 @@ engravingEdit.onclick = () => {
 }
 
  // PRODUCT Event Listener
- window.addEventListener('product', function (e) {
-    const product = getState('product');
+ window.addEventListener('products', function (e) {
+    const products = getState('products');
+    const groupingIds = getState('groupingIds');
+    const product = products[groupingIds[0]];
     renderPDP(product);
 });   
