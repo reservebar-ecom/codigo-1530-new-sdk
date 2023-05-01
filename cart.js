@@ -2,7 +2,11 @@ const updateCartCountItems = (cart) => {
     if (cart) {
         const totalNumberElements = document.querySelectorAll('.cart-num-items');
         totalNumberElements.forEach(el => {
-            el.innerHTML = cart?.itemCount;
+            if(cart?.itemCount){
+                el.innerHTML = cart?.itemCount;
+            }else{
+                el.innerHTML = ''
+            }
         })
     }
 }
@@ -36,7 +40,10 @@ const cartItemHTML = (cartItem) => {
                     <h5>${cartItem.productGrouping.name}</h5>
                     <button class="remove-item" onclick="deleteCartItem(${cartItem.product.id})">✕</button>
                 </div>
-                <p class="cart-item-expectation">${cartItem.deliveryExpectation}</p>
+                ${
+                    cartItem.deliveryExpectation ?
+                    `<p class="cart-item-expectation">${cartItem.deliveryExpectation}</p>`: ''
+                }
                 <p class="cart-item-volume">${cartItem.product.volume.toUpperCase()} ${cartItem.product.containerType}</p> 
                 <div class="cart-qty-wrapper"> 
                     <select onchange="updateCartItem({variantId: ${cartItem.product.id}, quantity: this.value})" name="qty" id="qty-${cartItem.identifier}">
@@ -82,8 +89,10 @@ const updateCartDrawer = (cart) => {
 }
 
 const updateCartSubtotal = (cart) => {
-    if (cart) {
+    if (cart && cart?.subtotal) {
         document.querySelector('#cart-subtotal').innerHTML = `$ ${cart.subtotal}`;
+    } else{
+        document.querySelector('#cart-subtotal').innerHTML = '';
     }
 }
 
@@ -140,9 +149,7 @@ const checkout = async () => {
 // CART Event Listener
 window.addEventListener('cart', function (e) {
     const cart = getState('cart');
-
     updateCartDependencies(cart);
-
     const isOpen = isCartOpen();
     if (!isOpen) {
         openCart()
@@ -162,9 +169,7 @@ updateCartDependencies(cart);
 
 // Overwrite Codigo's Cart
 addEventListener("DOMContentLoaded", (event) => {
-
     const cartIcons = document.querySelectorAll('.kart');
-    
     setTimeout(()=>{
         [...cartIcons].forEach(cartIcon => {
             cartIcon.removeAttribute("href");
