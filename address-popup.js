@@ -87,6 +87,8 @@ addressOptions.forEach(addressOption => {
 
 // ADDRESS Event Listener
 window.addEventListener('address', async function (e) {
+    console.log('# address.');
+
     const address = getState('address');
     const addressInput = document.querySelector('#address-input');
     addressInput.value = address?.description || '';

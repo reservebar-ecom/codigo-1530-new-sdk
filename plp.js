@@ -28,11 +28,20 @@ const createProductCart = (product, id) => {
     productContent.append(productCard);
 }
 
-const liquidIdEls = document.querySelectorAll('[liquid-id]');
-const groupingIds = [...liquidIdEls].map(el => el.getAttribute('liquid-id'));
+(async () => {
+    const liquid = await new Liquid({ clientId: '81751648f545a97274df4e2782d01a70' });
+    window.liquid = liquid;
+    
+    const liquidIdEls = document.querySelectorAll('[liquid-id]');
+    const groupingIds = [...liquidIdEls].map(el => el.getAttribute('liquid-id'));
+    setState({ name: 'grouping_ids', value: [...new Set(groupingIds)] || null });
+
+    window.dispatchEvent(new Event('address'));
+})();
 
 // PRODUCTS Event Listener
 window.addEventListener('products', async function (e) {
+    console.log('# products.');
     const products = getState('products');
     const groupingIds = getState('grouping_ids');
 
@@ -41,20 +50,3 @@ window.addEventListener('products', async function (e) {
         createProductCart(product, groupingId);
     })
 });
-
-(async () => {
-
-    const liquid = await new Liquid({ clientId: '81751648f545a97274df4e2782d01a70' });
-    window.liquid = liquid;
-
-    setState({ name: 'grouping_ids', value: groupingIds || null });
-
-    const address = getState('address');
-
-    const products = await liquid.product({
-        ids: groupingIds,
-        shipAddress: '120 Nassau Street, Brooklyn, NY 11201, USA'
-    });
-
-    setState({ name: 'products', value: products || null });
-})();

@@ -155,11 +155,6 @@ button {
     padding: 0.45rem;
  }
  
- .visible {
-    visibility:visible;
-    opacity: 1;
- }
- 
  .retailer-delivery-expectation{
     margin: 0;
    margin-left: 1rem;
@@ -383,4 +378,7 @@ button {
 .visible {
     display: flex !important;
     align-items: center;
+    visibility:visible;
+    opacity: 1;
+    justify-content: center;
 }
