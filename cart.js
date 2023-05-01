@@ -2,9 +2,9 @@ const updateCartCountItems = (cart) => {
     if (cart) {
         const totalNumberElements = document.querySelectorAll('.cart-num-items');
         totalNumberElements.forEach(el => {
-            if(cart?.itemCount){
+            if (cart?.itemCount) {
                 el.innerHTML = cart?.itemCount;
-            }else{
+            } else {
                 el.innerHTML = ''
             }
         })
@@ -40,16 +40,15 @@ const cartItemHTML = (cartItem) => {
                     <h5>${cartItem.productGrouping.name}</h5>
                     <button class="remove-item" onclick="deleteCartItem(${cartItem.product.id})">✕</button>
                 </div>
-                ${
-                    cartItem.deliveryExpectation ?
-                    `<p class="cart-item-expectation">${cartItem.deliveryExpectation}</p>`: ''
-                }
+                ${cartItem.deliveryExpectation ?
+            `<p class="cart-item-expectation">${cartItem.deliveryExpectation}</p>` : ''
+        }
                 <p class="cart-item-volume">${cartItem.product.volume.toUpperCase()} ${cartItem.product.containerType}</p> 
                 <div class="cart-qty-wrapper"> 
                     <select onchange="updateCartItem({variantId: ${cartItem.product.id}, quantity: this.value})" name="qty" id="qty-${cartItem.identifier}">
                         ${[...Array(cartItem.product.inStock).keys()].map(index =>
-        `<option value="${index + 1}" ${cartItem.quantity == index + 1 ? 'selected="selected"' : ''}>${index + 1}</option>`
-    ).join('')
+            `<option value="${index + 1}" ${cartItem.quantity == index + 1 ? 'selected="selected"' : ''}>${index + 1}</option>`
+        ).join('')
         }
                     </select>
                     $${cartItem.product.price}
@@ -91,7 +90,7 @@ const updateCartDrawer = (cart) => {
 const updateCartSubtotal = (cart) => {
     if (cart && cart?.subtotal) {
         document.querySelector('#cart-subtotal').innerHTML = `$ ${cart.subtotal}`;
-    } else{
+    } else {
         document.querySelector('#cart-subtotal').innerHTML = '';
     }
 }
@@ -103,7 +102,7 @@ const isCartOpen = () => {
 
 const toggleCart = () => {
     const isOpen = isCartOpen();
-    if(isOpen){
+    if (isOpen) {
         closeCart();
     } else {
         openCart();
@@ -142,7 +141,11 @@ const checkout = async () => {
         address: addressObj
     });
 
-    window.location.href = checkoutObj.url;
+    window.open(
+        checkoutObj.url,
+        '_blank'
+    );
+
     hideLoader();
 }
 
@@ -170,7 +173,7 @@ updateCartDependencies(cart);
 // Overwrite Codigo's Cart
 addEventListener("DOMContentLoaded", (event) => {
     const cartIcons = document.querySelectorAll('.kart');
-    setTimeout(()=>{
+    setTimeout(() => {
         [...cartIcons].forEach(cartIcon => {
             cartIcon.removeAttribute("href");
             cartIcon.onclick = toggleCart;
