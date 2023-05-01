@@ -42,7 +42,6 @@ const createProductCart = (product, id) => {
 
 // PRODUCTS Event Listener
 window.addEventListener('products', async function (e) {
-    console.log('# products.');
     const products = getState('products');
     const groupingIds = getState('grouping_ids');
 

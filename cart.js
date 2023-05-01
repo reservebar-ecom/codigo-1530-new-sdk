@@ -25,8 +25,6 @@ const updateCartItem = async ({ variantId, quantity, engravingOptions }) => {
         ],
     });
 
-    console.log(updatedCart);
-
     setState({ name: 'cart', value: updatedCart });
 }
 
