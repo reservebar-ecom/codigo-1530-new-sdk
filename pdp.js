@@ -105,7 +105,6 @@ const renderPDP = (product) => {
         document.querySelector('#product-description').innerHTML = product.descriptionHtml;
         document.querySelector('#product-name').innerText = product.name;
         const productVariant = product.variants[0];
-        const productRetailer = productVariant.retailers[0];
         document.querySelector('#product-img').src = `${productVariant.images[0] || product.images[0]}`;
 
         document.querySelector('#size-selector').innerHTML = product.variants.map(variant =>
@@ -140,6 +139,7 @@ const renderPDP = (product) => {
         });
 
         // Show or hide engraving for first variant
+        const productRetailer = productVariant.retailers[0];
         const hasEngraving = productRetailer.type == 'engraved';
         const engravingElement = document.querySelector('#engraving');
         if (hasEngraving) {
