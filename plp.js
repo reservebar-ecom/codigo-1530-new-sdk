@@ -5,7 +5,8 @@ const createProductCart = (product, id) => {
     const productContent = document.querySelector(`[liquid-id="${id}"]`);
     productContent.innerHTML = '';
     let productCard = document.createElement('a');
-    productCard.href = `/pdp?id=${id}`;
+    const baseURL = '/product';
+    productCard.href = baseURL + `?groupingId=${id}`;
     productCard.classList.add('product-card');
 
     productHTML = `

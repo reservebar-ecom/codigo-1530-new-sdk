@@ -212,7 +212,7 @@ const loadLiquid = async () => {
     // Grouping ID
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
-    const groupingId = 'GROUPING-741422'; //urlParams.get('id'); TODO: change it later
+    const groupingId = urlParams.get('groupingId');
     setState({ name: 'grouping_ids', value: [groupingId] });
     window.dispatchEvent(new Event('address'));
 }
