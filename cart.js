@@ -36,8 +36,8 @@ const cartItemHTML = (cartItem) => {
                     <h5>${cartItem.productGrouping.name}</h5>
                     <button class="remove-item" onclick="deleteCartItem(${cartItem.product.id})">✕</button>
                 </div>
-                <small>${cartItem.deliveryExpectation}</small>
-                <small>${cartItem.product.volume.toUpperCase()} ${cartItem.product.containerType}</small> 
+                <p class="cart-item-expectation">${cartItem.deliveryExpectation}</p>
+                <p class="cart-item-volume">${cartItem.product.volume.toUpperCase()} ${cartItem.product.containerType}</p> 
                 <div class="cart-qty-wrapper"> 
                     <select onchange="updateCartItem({variantId: ${cartItem.product.id}, quantity: this.value})" name="qty" id="qty-${cartItem.identifier}">
                         ${[...Array(cartItem.product.inStock).keys()].map(index =>
@@ -149,7 +149,6 @@ window.addEventListener('cart', function (e) {
     }
 });
 
-
 // Set onclick function 
 document.querySelector('#close-cart').onclick = closeCart;
 document.querySelector('#cart-backdrop').onclick = closeCart;
@@ -161,9 +160,7 @@ document.querySelector('#checkout').onclick = async () => {
 let cart = getState('cart');
 updateCartDependencies(cart);
 
-
 // Overwrite Codigo's Cart
-
 addEventListener("DOMContentLoaded", (event) => {
 
     const cartIcons = document.querySelectorAll('.kart');

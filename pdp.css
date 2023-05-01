@@ -153,22 +153,6 @@ button {
     padding: 0.45rem;
  }
  
- #checkout {
-    width: 100%;
-    border: 1px solid black;
-    padding: .5rem;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: all .2s ease-in-out;
-    margin-bottom: 1rem;
- }
- 
- #checkout:hover {
-    background-color: black;
-    color: white;
- }
- 
-  
  .visible {
     visibility:visible;
     opacity: 1;
