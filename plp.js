@@ -1,7 +1,6 @@
 const createProductCart = (product, id) => {
 
     const address = getState('address');
-    console.log('address',address);
     const retailerTypes = { "onDemand": "Get it now", "engraved": "Engraving Available", "shipping": "Get it Shipped" };
     const productContent = document.querySelector(`[liquid-id="${id}"]`);
     productContent.innerHTML = '';

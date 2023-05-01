@@ -92,14 +92,18 @@ window.addEventListener('address', async function (e) {
     addressInput.value = address?.description || '';
     addressOpenButton.innerHTML = address?.description || 'Enter Delivery Address';
 
-    const addressObj = await liquid.address({ placeId: address.placeId });
+    let addressObj = null;
+
+    if(address?.placeId){
+        addressObj = await liquid.address({ placeId: address?.placeId });
+    }
     const groupingIds = getState('grouping_ids');
 
     if(groupingIds){
         const products = await liquid.product({
             ids: groupingIds,
-            latitude: addressObj.latitude,
-            longitude: addressObj.longitude
+            ...(addressObj && {latitude: addressObj?.latitude}),
+            ...(addressObj && {longitude: addressObj?.longitude})
         });
     
         setState({ name: 'products', value: products || null });

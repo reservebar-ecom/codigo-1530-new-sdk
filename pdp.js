@@ -82,7 +82,7 @@ const renderPDP = (product) => {
                   <div class="variant ${index == 0 && 'enabled'}" size="${variant.size}">
                     ${variantRetailers.map((retailer, i) =>
                 `
-                    <div class="variant-option ${index==0 && i==0 ? 'selected' : ''}">
+                    <div class="variant-option ${index == 0 && i == 0 ? 'selected' : ''}">
                         <div>
                             <h5>${typeMap[retailer.type]}</h5>
                             <input class="variant-id" name="variant-${index}" type="radio" value="${retailer.id}" id="${retailer.id}" engraving="${retailer.type == 'engraved'}" ${i == 0 ? 'checked' : ''}/>
@@ -105,11 +105,15 @@ const renderPDP = (product) => {
         document.querySelector('#product-description').innerHTML = product.descriptionHtml;
         document.querySelector('#product-name').innerText = product.name;
         const productVariant = product.variants[0];
-        document.querySelector('#product-img').src = `${productVariant.images[0] || product.images[0]}`;
+        document.querySelector('#product-img').src = `${productVariant?.images[0] || product.images[0]}`;
 
-        document.querySelector('#size-selector').innerHTML = product.variants.map(variant =>
-            `<option value="${variant.size}">${variant.size}</option>`
-        ).join('');
+        const sizeSelector = document.querySelector('#size-selector');
+        if(product.variants.length){
+            sizeSelector.classList.add('visible');
+            sizeSelector.innerHTML = product.variants.map(variant =>
+                `<option value="${variant.size}">${variant.size}</option>`
+            ).join('');
+        }
 
         document.querySelector('#qty-selector-container').innerHTML =
             product.variants.map((variant, variantIndex) => {
@@ -124,10 +128,6 @@ const renderPDP = (product) => {
             }
             ).join('');
 
-        // Add to Cart
-        document.querySelector('#atc').onclick = async () => {
-            await addToCart();
-        };
 
         // On Variant ID input change
         const variantIdInputs = [...document.querySelectorAll('.variant-id')];
@@ -138,9 +138,19 @@ const renderPDP = (product) => {
             }
         });
 
+        // Add to Cart
+        const atcButton = document.querySelector('#atc');
+        atcButton.onclick = async () => {
+            await addToCart();
+        };
+
+        if (productVariant?.retailers) {
+            atcButton.classList.add('visible');
+        }
+
         // Show or hide engraving for first variant
-        const productRetailer = productVariant.retailers[0];
-        const hasEngraving = productRetailer.type == 'engraved';
+        const productRetailer = productVariant?.retailers[0];
+        const hasEngraving = productRetailer?.type == 'engraved';
         const engravingElement = document.querySelector('#engraving');
         if (hasEngraving) {
             engravingElement.classList.add('active');
@@ -184,10 +194,12 @@ const renderPDP = (product) => {
 const addToCart = async () => {
     showLoader();
     const retailerOption = document.querySelector('div.variant.enabled');
-    const variantId = retailerOption.querySelector('input:checked').value;
-    const quantity = document.querySelector(`select.qty-selector.enabled`).value;
-    const engravingOptions = document.querySelector('#engraving-checkbox').checked && getState('engraving');
-    await updateCartItem({ variantId, quantity, engravingOptions });
+    if(retailerOption){
+        const variantId = retailerOption.querySelector('input:checked').value;
+        const quantity = document.querySelector(`select.qty-selector.enabled`).value;
+        const engravingOptions = document.querySelector('#engraving-checkbox').checked && getState('engraving');
+        await updateCartItem({ variantId, quantity, engravingOptions });
+    }
     hideLoader();
 }
 
@@ -281,10 +293,10 @@ engravingEdit.onclick = () => {
     engravingEdit.disabled = true;
 }
 
- // PRODUCT Event Listener
- window.addEventListener('products', function (e) {
+// PRODUCT Event Listener
+window.addEventListener('products', function (e) {
     const products = getState('products');
-    const groupingIds = getState('groupingIds');
+    const groupingIds = getState('grouping_ids');
     const product = products[groupingIds[0]];
     renderPDP(product);
 });   

@@ -100,6 +100,7 @@ button {
  }
  
  #atc {
+    display: none;
     border: 1px solid black;
     font-weight: bolder;
     text-transform: uppercase;
@@ -142,6 +143,7 @@ button {
  }
  
  #size-selector {
+    display: none;
     font-weight: bolder;
     border: 1px solid black;
     background-color: white;
