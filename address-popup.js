@@ -90,7 +90,7 @@ window.addEventListener('address', async function (e) {
     const address = getState('address');
     const addressInput = document.querySelector('#address-input');
     addressInput.value = address?.description || '';
-    addressOpenButton.innerHTML = address.description || 'Enter delivery address';
+    addressOpenButton.innerHTML = address?.description || 'Enter Delivery Address';
 
     const addressObj = await liquid.address({ placeId: address.placeId });
     const groupingIds = getState('grouping_ids');
