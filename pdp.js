@@ -66,8 +66,6 @@ const handleSizeSelector = (selectedSize) => {
 
 const renderPDP = (product) => {
 
-    const pdp = document.querySelector('#pdp');
-
     if (product) {
         const variants = product.variants;
         const typeMap = {
@@ -84,7 +82,10 @@ const renderPDP = (product) => {
                 `
                     <div class="variant-option ${index == 0 && i == 0 ? 'selected' : ''}">
                         <div>
+                        <div class="retailer-type-and-price">
                             <h5>${typeMap[retailer.type]}</h5>
+                            <span>$${retailer.price}</span>
+                        </div>
                             <input class="variant-id" name="variant-${index}" type="radio" value="${retailer.id}" id="${retailer.id}" engraving="${retailer.type == 'engraved'}" ${i == 0 ? 'checked' : ''}/>
                             <label for="${retailer.id}">
                                 ${retailer.name}
@@ -93,7 +94,6 @@ const renderPDP = (product) => {
                                 <small>${retailer.deliveryExpectation}</small>
                             </p>
                         </div>
-                        <span>$${retailer.price}</span>
                     </div>
             `
             ).join('')

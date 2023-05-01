@@ -53,3 +53,33 @@
     color: slategray;
     font-size: 12px;
 }
+
+.retailer-type-and-price {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+@media only screen and (max-width: 992px) {
+    #product-info {
+        padding: 0;
+        max-width: 100%;
+    }
+
+    #product-description {
+        padding: 0;
+    }
+
+    #product-img {
+        display: none;
+    }
+
+    #atc {
+        width: 100%;
+        margin-top: 1rem;
+    }
+
+    .qty-selector {
+        margin-right: 0;
+    }
+  }
