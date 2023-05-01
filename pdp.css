@@ -99,6 +99,13 @@ button {
    opacity: 0;
 }
 
+.retailer-type-and-price {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   width: 100%;
+}
+
 #atc {
    display: none;
    border: 1px solid black;

@@ -54,13 +54,6 @@
     font-size: 12px;
 }
 
-.retailer-type-and-price {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-
 @media only screen and (max-width: 992px) {
     [liquid-id] {
         width: 100%;

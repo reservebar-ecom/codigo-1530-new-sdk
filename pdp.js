@@ -82,7 +82,7 @@ const renderPDP = (product) => {
                     ${variantRetailers.map((retailer, i) =>
                 `
                     <div class="variant-option ${index == 0 && i == 0 ? 'selected' : ''}">
-                        <div>
+                        <div style="width:100%">
                         <div class="retailer-type-and-price">
                             <h5>${typeMap[retailer.type]}</h5>
                             <span>$${retailer.price}</span>
