@@ -60,6 +60,10 @@
     align-items: center;
 }
 
+#product-img-mobile {
+    display: none;
+}
+
 @media only screen and (max-width: 992px) {
     #product-info {
         padding: 0;
@@ -72,6 +76,11 @@
 
     #product-img {
         display: none;
+    }
+
+    #product-img-mobile {
+        display: block;
+        width: 100%;
     }
 
     #atc {

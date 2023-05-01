@@ -33,6 +33,7 @@ const handleSizeSelector = (selectedSize) => {
         const productVariant = product.variants.find(e => e.size == selectedSize)
         if (productVariant.images[0]) {
             document.querySelector('#product-img').src = productVariant.images[0];
+            document.querySelector('#product-img-mobile').src = productVariant.images[0];
         }
 
         // Select the corresponding retailers for Size
@@ -106,6 +107,7 @@ const renderPDP = (product) => {
         document.querySelector('#product-name').innerText = product.name;
         const productVariant = product.variants[0];
         document.querySelector('#product-img').src = `${productVariant?.images[0] || product.images[0]}`;
+        document.querySelector('#product-img-mobile').src = `${productVariant?.images[0] || product.images[0]}`;
 
         const sizeSelector = document.querySelector('#size-selector');
         if(product.variants.length){
@@ -212,7 +214,7 @@ const loadLiquid = async () => {
     // Grouping ID
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
-    const groupingId = urlParams.get('groupingId');
+    const groupingId = 'GROUPING-741422';// urlParams.get('groupingId');
     setState({ name: 'grouping_ids', value: [groupingId] });
     window.dispatchEvent(new Event('address'));
 }
