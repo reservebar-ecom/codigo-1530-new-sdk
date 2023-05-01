@@ -382,3 +382,37 @@ button {
     opacity: 1;
     justify-content: center;
 }
+
+
+#product-img-mobile {
+   display: none;
+}
+
+@media only screen and (max-width: 992px) {
+   #product-info {
+       padding: 0;
+       max-width: 100%;
+   }
+
+   #product-description {
+       padding: 0;
+   }
+
+   #product-img {
+       display: none;
+   }
+
+   #product-img-mobile {
+       display: block;
+       width: 100%;
+   }
+
+   #atc {
+       width: 100%;
+       margin-top: 1rem;
+   }
+
+   .qty-selector {
+       margin-right: 0;
+   }
+ }
