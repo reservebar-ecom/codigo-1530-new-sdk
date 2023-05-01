@@ -204,15 +204,17 @@ const loadLiquid = async () => {
     setState({ name: 'grouping_id', value: groupingId });
 
     // Address
-    let address = { description: '120 Nassau Street, Brooklyn, NY 11201, USA' };// TODO: move to getState('address');
+    let address = getState('address');
 
     // Get product
-    const products = await liquid.product({
-        ids: [groupingId],
-        shipAddress: address.description
-    });
-
-    setState({ name: 'product', value: products[groupingId] });
+    if(address){
+        const products = await liquid.product({
+            ids: [groupingId],
+            shipAddress: address.description
+        });
+    
+        setState({ name: 'product', value: products[groupingId] });
+    }
 }
 
 
