@@ -435,12 +435,21 @@ button {
       width: 100%;
    }
 
+   #atc-container {
+      flex-wrap: wrap;
+   }
+
    #atc {
       width: 100%;
-      margin-top: 1rem;
+      margin-bottom: 1rem;
+   }
+
+   #size-selector {
+      margin-bottom: 1rem;
    }
 
    .qty-selector {
-      margin-right: 0;
+      margin-right: 0 !important;
+      margin-bottom: 1rem;
    }
 }
