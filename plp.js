@@ -1,6 +1,11 @@
+const engravingIcon = `<div text="Engraving Available" class="engraving-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-ticket-detailed" viewBox="0 0 16 16">
+<path d="M4 5.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5Zm0 5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5ZM5 7a1 1 0 0 0 0 2h6a1 1 0 1 0 0-2H5Z"/>
+<path d="M0 4.5A1.5 1.5 0 0 1 1.5 3h13A1.5 1.5 0 0 1 16 4.5V6a.5.5 0 0 1-.5.5 1.5 1.5 0 0 0 0 3 .5.5 0 0 1 .5.5v1.5a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 0 11.5V10a.5.5 0 0 1 .5-.5 1.5 1.5 0 1 0 0-3A.5.5 0 0 1 0 6V4.5ZM1.5 4a.5.5 0 0 0-.5.5v1.05a2.5 2.5 0 0 1 0 4.9v1.05a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-1.05a2.5 2.5 0 0 1 0-4.9V4.5a.5.5 0 0 0-.5-.5h-13Z"/>
+</svg></div>`;
+
 const createProductCart = (product, id) => {
 
-    if(product){
+    if (product) {
         const address = getState('address');
         const productContent = document.querySelector(`[liquid-id="${id}"]`);
         productContent.innerHTML = '';
@@ -15,11 +20,15 @@ const createProductCart = (product, id) => {
             )
         )[0];
 
-        const minimumPrice = prices ?  Math.min(...prices) : '';
-        
+        const minimumPrice = prices ? Math.min(...prices) : '';
+
+        const hasEngraving = [...new Set(product.variants.map(variant => variant.availability).flat())].some(e => e == 'engraved');
+
+        console.log(`>>`, hasEngraving);
+
         productHTML = `
+              ${hasEngraving ? engravingIcon : ''}
                  <img src="${product?.images[0].slice(6,)}" style="width: 100%;" >
-                 <b>${product?.name}</b>
                  ${address ?
                 ` 
                         ${product?.variants?.length === 0 ? '<p class="product-unavailable">Unavailable Product</p>' : ''}
@@ -28,8 +37,9 @@ const createProductCart = (product, id) => {
                 :
                 `<p class="product-no-address">Insert Address to Check Availability</p>`
             }
+            <b>${product?.name}</b>
                 `;
-    
+
         productCard.innerHTML = productHTML;
         productContent.append(productCard);
     }
