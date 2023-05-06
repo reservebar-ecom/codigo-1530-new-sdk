@@ -135,6 +135,8 @@
  .cart-qty-wrapper select {
     width: 100px;
     font-family: "Barlow Semi Condensed";
+    height: 35px;
+    font-size: 1rem;
  }
 
  #cart-top {

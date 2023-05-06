@@ -110,5 +110,8 @@ window.addEventListener('address', async function (e) {
         setState({ name: 'products', value: products || null });
     }
     addressOptions.forEach(el => el.classList.remove('visible'));
-    closeAddressModal();
+    
+    if(addressObj){
+        closeAddressModal();
+    }
 });

@@ -49,10 +49,10 @@
    align-items: center;
 }
 
-#popup-modal h4 {
+#popup-modal h2 {
    text-align: center;
+   margin-top: .5rem;
 }
-
 
 #address-input-container {
    display: flex;
