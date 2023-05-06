@@ -332,6 +332,14 @@ button {
    color: slategrey;
 }
 
+.engraving-badge {
+   text-transform: uppercase;
+   color: steelblue;
+   border: 1px solid slategray;
+   padding: .125rem;
+   font-size: 12px;
+}
+
 .engraving-header {
    display: flex;
    align-items: center;

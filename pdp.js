@@ -72,7 +72,7 @@ const renderPDP = (product) => {
         const typeMap = {
             on_demand: 'Get it Now',
             shipped: 'Get it Shipped',
-            engraved: 'Get it Shipped ( Optional Engraving)'
+            engraved: 'Get it Shipped'
         }
 
         document.querySelector('#variants').innerHTML = variants.map((variant, index) => {
@@ -86,6 +86,7 @@ const renderPDP = (product) => {
                         <div style="width:100%">
                         <div class="retailer-type-and-price">
                             <h5>${typeMap[variant.type]}</h5>
+                            ${variant.type == 'engraved' ? '<span class="engraving-badge">engraving</span>' : ''}
                             <span>$${variant.price}</span>
                         </div>
                             <input class="variant-id" name="variant-${index}" type="radio" value="${variant.variantId}" id="${variant.variantId}" engraving="${variant.type == 'engraved'}" ${i == 0 ? 'checked' : ''}/>
