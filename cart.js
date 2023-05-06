@@ -13,6 +13,8 @@ const updateCartCountItems = (cart) => {
 
 const updateCartItem = async ({ variantId, quantity, engravingOptions }) => {
 
+    console.log('#ATC',{ variantId, quantity, engravingOptions });
+
     const cart = getState('cart');
     const updatedCart = await liquid.cart({
         ...(cart && { id: cart.id }),
@@ -33,6 +35,7 @@ const deleteCartItem = async (variantId) => {
 }
 
 const cartItemHTML = (cartItem) => {
+    
     return `
             <img src="${cartItem.product.imageUrl}">
             <div class="cart-item-info">

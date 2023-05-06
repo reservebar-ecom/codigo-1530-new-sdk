@@ -100,6 +100,7 @@ window.addEventListener('address', async function (e) {
     const groupingIds = getState('grouping_ids');
 
     if(groupingIds){
+
         const products = await liquid.product({
             ids: groupingIds,
             ...(addressObj && {latitude: addressObj?.latitude}),

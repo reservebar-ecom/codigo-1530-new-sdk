@@ -1,11 +1,11 @@
 const getVariantRetailers = (variant) => {
 
-    const retailerTypes = ["onDemand", "engraved", "shipping"];
+    const retailerTypes = ["on_demand", "engraved", "shipped"];
     const variantRetailers = retailerTypes.map(type => {
         return variant.retailers.filter(e => e.type == type).sort((a, b) => parseFloat(a.price) - parseFloat(b.price))[0];
     }).filter(e => e);
 
-    const variantRetailersUniqueID = [...new Set(variantRetailers.map(v => v.id))].map(id => variantRetailers.find(v => v.id == id));
+    const variantRetailersUniqueID = [...new Set(variantRetailers.map(v => v.variantId))].map(id => variantRetailers.find(v => v.variantId == id));
 
     return variantRetailersUniqueID
 }
@@ -70,29 +70,30 @@ const renderPDP = (product) => {
     if (product) {
         const variants = product.variants;
         const typeMap = {
-            onDemand: 'Get it Now',
-            shipping: 'Get it Shipped',
+            on_demand: 'Get it Now',
+            shipped: 'Get it Shipped',
             engraved: 'Get it Shipped ( Optional Engraving)'
         }
 
         document.querySelector('#variants').innerHTML = variants.map((variant, index) => {
             let variantRetailers = getVariantRetailers(variant);
+
             return `
                   <div class="variant ${index == 0 && 'enabled'}" size="${variant.size}">
-                    ${variantRetailers.map((retailer, i) =>
+                    ${variantRetailers.map((variant, i) =>
                 `
                     <div class="variant-option ${index == 0 && i == 0 ? 'selected' : ''}">
                         <div style="width:100%">
                         <div class="retailer-type-and-price">
-                            <h5>${typeMap[retailer.type]}</h5>
-                            <span>$${retailer.price}</span>
+                            <h5>${typeMap[variant.type]}</h5>
+                            <span>$${variant.price}</span>
                         </div>
-                            <input class="variant-id" name="variant-${index}" type="radio" value="${retailer.id}" id="${retailer.id}" engraving="${retailer.type == 'engraved'}" ${i == 0 ? 'checked' : ''}/>
-                            <label for="${retailer.id}">
-                                ${retailer.name}
+                            <input class="variant-id" name="variant-${index}" type="radio" value="${variant.variantId}" id="${variant.variantId}" engraving="${variant.type == 'engraved'}" ${i == 0 ? 'checked' : ''}/>
+                            <label for="${variant.variantId}">
+                                ${variant.retailer.name}
                             </label>
                             <p class="retailer-delivery-expectation">
-                                <small>${retailer.deliveryExpectation}</small>
+                                <small>${variant.shippingMethod.desc.expected}</small>
                             </p>
                         </div>
                     </div>
@@ -208,7 +209,7 @@ const addToCart = async () => {
 const loadLiquid = async () => {
 
     // Initialize Liquid
-    const liquid = await new Liquid({ clientId: '81751648f545a97274df4e2782d01a70' });
+    const liquid = await new Liquid({ clientId: 'eefe7f3c5f2323e30fd42ea2e8091d09', env: 'staging' });
     window.liquid = liquid;
 
     // Grouping ID
@@ -299,6 +300,6 @@ engravingEdit.onclick = () => {
 window.addEventListener('products', function (e) {
     const products = getState('products');
     const groupingIds = getState('grouping_ids');
-    const product = products[groupingIds[0]];
+    const product = products[0];
     renderPDP(product);
 });   
