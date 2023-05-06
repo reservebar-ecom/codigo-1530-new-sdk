@@ -314,30 +314,23 @@ button {
    display: flex;
 }
 
-#engraving input:read-only {
-   border: 1px solid transparent;
-   background-color: rgba(168, 175, 182, 0.192);
-}
-
-#engraving input:read-only:focus {
-   outline: none;
-}
-
-#engraving input:read-only::placeholder {
-   color: rgba(170, 179, 187, 0);
-}
-
 #engraving button:disabled {
    opacity: 1;
    color: slategrey;
 }
 
+label[for="engraving-checkbox"] {
+
+   margin-left: .5rem;
+}
+
 .engraving-badge {
    text-transform: uppercase;
-   color: steelblue;
-   border: 1px solid slategray;
-   padding: .125rem;
-   font-size: 12px;
+   background: slategray;
+   border: 1px solid transparent;
+   padding: 0 0.5rem;
+   font-size: 14px !important;
+   color: white;
 }
 
 .engraving-header {
@@ -365,6 +358,15 @@ button {
    flex-direction: column;
 }
 
+#engraving-inputs input {
+   margin-left: 1rem;
+}
+
+#engraving-inputs input:read-only {
+   border-bottom: none;
+   color: black;
+}
+
 .engraving-body p {
    padding: .125rem 1rem;
    border: 1px solid black;
@@ -377,6 +379,8 @@ button {
 
 .engraving-atc {
    margin-top: 1rem;
+   display: flex;
+   justify-content: end;
 }
 
 .engraving-labels {
