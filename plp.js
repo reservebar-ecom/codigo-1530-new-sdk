@@ -18,7 +18,7 @@ const createProductCart = (product, id) => {
         const minimumPrice = prices ?  Math.min(...prices) : '';
         
         productHTML = `
-                 <div class="product-image" style='background-image: url(${product?.images[0].slice(6,)})' ></div>
+                 <img src="${product?.images[0].slice(6,)}" style="width: 100%;" >
                  <b>${product?.name}</b>
                  ${address ?
                 ` 
