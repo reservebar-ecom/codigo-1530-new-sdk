@@ -226,8 +226,7 @@ const addToCart = async () => {
 const loadLiquid = async () => {
 
     // Initialize Liquid
-    const liquid = await new Liquid({ clientId: 'eefe7f3c5f2323e30fd42ea2e8091d09', env: 'staging' });
-    window.liquid = liquid;
+    const liquid = await new Liquid({ clientId: 'eefe7f3c5f2323e30fd42ea2e8091d09', env: 'staging' }); window.liquid = liquid;
 
     // Grouping ID
     const queryString = window.location.search;
