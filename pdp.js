@@ -11,7 +11,6 @@ const getVariantRetailers = (variant) => {
 }
 
 const quantitySelectorHTML = ({ product, variantId, isActive }) => {
-    console.log('>>variantId',variantId);
     const variants = product.variants.map(variant => variant.retailers).flat();
     const variant = variants.find(variant => variant.variantId == variantId);
     const inStockQuantity = variant.inStock;

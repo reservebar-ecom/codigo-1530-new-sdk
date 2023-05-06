@@ -307,19 +307,11 @@ button {
    justify-content: center;
    padding: 1rem;
    margin: 1rem 0;
-   background-color: rgba(112, 128, 144, 0.192);
+   background-color: rgb(62 77 77 / 3%);
 }
 
 #engraving.active {
    display: flex;
-}
-
-#engraving input {
-   padding: .25rem 1rem;
-   border: 1px solid black;
-   margin: .25rem;
-   border-radius: 0px;
-   font-weight: bolder;
 }
 
 #engraving input:read-only {
@@ -335,31 +327,9 @@ button {
    color: rgba(170, 179, 187, 0);
 }
 
-
-#engraving button {
-   padding: .25rem 1rem;
-   border: 1px solid black;
-   margin: .25rem;
-   border-radius: 0px;
-   background-color: white;
-   font-weight: bolder;
-   transition: all .2s ease-in-out;
-   opacity: 1;
-}
-
 #engraving button:disabled {
    opacity: 1;
-}
-
-#engraving button:disabled:hover {
-   background-color: white;
-   color: black;
-   cursor: not-allowed;
-}
-
-#engraving button:hover {
-   background-color: black;
-   color: white;
+   color: slategrey;
 }
 
 .engraving-header {
@@ -395,6 +365,10 @@ button {
    display: none;
    font-weight: bolder;
    font-size: 14px;
+}
+
+.engraving-atc {
+   margin-top: 1rem;
 }
 
 .engraving-labels {

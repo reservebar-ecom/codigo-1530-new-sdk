@@ -13,8 +13,6 @@ const updateCartCountItems = (cart) => {
 
 const updateCartItem = async ({ variantId, quantity, engravingOptions }) => {
 
-    console.log('#ATC',{ variantId, quantity, engravingOptions });
-
     const cart = getState('cart');
     const updatedCart = await liquid.cart({
         ...(cart && { id: cart.id }),
