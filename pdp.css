@@ -382,7 +382,7 @@ button {
    height: auto;
 }
 
-.engraving-inputs {
+#engraving-inputs {
    display: flex;
    flex-direction: column;
 }

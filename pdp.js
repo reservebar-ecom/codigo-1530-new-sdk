@@ -11,8 +11,9 @@ const getVariantRetailers = (variant) => {
 }
 
 const quantitySelectorHTML = ({ product, variantId, isActive }) => {
+    console.log('>>variantId',variantId);
     const variants = product.variants.map(variant => variant.retailers).flat();
-    const variant = variants.find(variant => variant.id == variantId)
+    const variant = variants.find(variant => variant.variantId == variantId);
     const inStockQuantity = variant.inStock;
 
     return `
@@ -114,7 +115,7 @@ const renderPDP = (product) => {
         if(product.variants.length){
             sizeSelector.classList.add('visible');
             sizeSelector.innerHTML = product.variants.map(variant =>
-                `<option value="${variant.size}">${variant.size}</option>`
+                `<option value="${variant.productId}">${variant.size}</option>`
             ).join('');
         }
 
@@ -124,7 +125,7 @@ const renderPDP = (product) => {
                 return variantRetailers.map((retailer, retailerIndex) =>
                     quantitySelectorHTML({
                         product: product,
-                        variantId: retailer.id,
+                        variantId: retailer.variantId,
                         isActive: (variantIndex == 0 && retailerIndex == 0)
                     })
                 ).join('')
@@ -166,16 +167,32 @@ const renderPDP = (product) => {
         [...variantIdBlocks].forEach(variantIdBlock =>
             variantIdBlock.onclick = (e) => {
 
-                // Select the child input
-                variantIdBlock.querySelector('input').click();
+                const variantIdInput = variantIdBlock.querySelector('input');
 
-                // Show or hide engraving
-                const hasEngraving = variantIdBlock.querySelector('input').getAttribute('engraving') == 'true';
+                // Select the child input
+                variantIdInput.click();
+
+                // ENGRAVING - Show or hide engraving
+                const hasEngraving = variantIdInput.getAttribute('engraving') == 'true';
                 if (hasEngraving) {
                     engravingElement.classList.add('active');
                 } else {
                     engravingElement.classList.remove('active');
                 }
+
+                // ENGRAVING - adjust lines and chars limit for engraving
+                const productId = document.querySelector('#size-selector').value;
+                const variant = product.variants.find(variant => variant.productId == productId );
+                const engravingLines = variant.engravingConfigs.lines;
+                const engravingChars = variant.engravingConfigs.characters;
+                const engravingInputs = [...document.querySelector('#engraving-inputs').querySelectorAll('input')];
+
+                engravingInputs.map((engravingInput, i) =>{
+                    engravingInput.maxlength = engravingChars;
+                    if(i+1 > engravingLines){
+                        engravingInput.style.display = 'none';
+                    }
+                });
 
                 // Show corresponding quantity selector
                 [...document.querySelectorAll('.qty-selector')].forEach(qtySelector => {
