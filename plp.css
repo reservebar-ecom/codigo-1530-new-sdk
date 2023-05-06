@@ -62,9 +62,32 @@
     font-size: 12px;
 }
 
-.engraving-icon {
+.engraving-icon-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     position: absolute;
+    width: 100%;
+    top: calc(100% - 6rem);
+}
+
+.engraving-icon {
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    border: 1px solid lightgray;
+    padding: 0 .5rem;
+}
+
+.engraving-icon small {
+    margin-right: .5rem;
+    color: gray;
+    font-size: 12px;
+    font-family: 'Barlow Semi Condensed' !important;
+}
+
+.engraving-icon svg {
+    opacity: .3;
 }
 
 @media only screen and (max-width: 768px) {
