@@ -24,8 +24,6 @@ addressModalBg.onclick = () => {
     closeAddressModal();
 }
 
-
-
 // Address input
 const addressInput = document.querySelector('#address-input');
 const addressOptions = [...document.querySelectorAll('.address-option')];
@@ -110,7 +108,7 @@ window.addEventListener('address', async function (e) {
         setState({ name: 'products', value: products || null });
     }
     addressOptions.forEach(el => el.classList.remove('visible'));
-    
+
     if(addressObj){
         closeAddressModal();
     }

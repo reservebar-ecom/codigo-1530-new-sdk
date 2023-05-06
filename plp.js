@@ -5,7 +5,7 @@ const createProductCart = (product, id) => {
         const productContent = document.querySelector(`[liquid-id="${id}"]`);
         productContent.innerHTML = '';
         let productCard = document.createElement('a');
-        const baseURL = '/product';
+        const baseURL = 'shop-tequila-mezcal/product';
         productCard.href = baseURL + `?groupingId=${id}`;
         productCard.classList.add('product-card');
 
