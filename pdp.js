@@ -232,7 +232,7 @@ const loadLiquid = async () => {
     // Grouping ID
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
-    const groupingId = 'GROUPING-741422';// urlParams.get('groupingId');
+    const groupingId = urlParams.get('groupingId');
     setState({ name: 'grouping_ids', value: [groupingId] });
     window.dispatchEvent(new Event('address'));
 }
@@ -316,7 +316,6 @@ engravingEdit.onclick = () => {
 // PRODUCT Event Listener
 window.addEventListener('products', function (e) {
     const products = getState('products');
-    const groupingIds = getState('grouping_ids');
     const product = products[0];
     renderPDP(product);
 });   
