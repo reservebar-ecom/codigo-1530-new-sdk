@@ -406,8 +406,34 @@ label[for="engraving-checkbox"] {
    justify-content: center;
    align-items: center;
 }
+.item.product-card {
+   position: relative;
+}
+
+.product-backdrop {
+   position: absolute;
+   width: 100%;
+   height: 100%;
+   backdrop-filter: brightness(50%) blur(1px);
+   opacity: 0;
+   transition: all .2s ease;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+   color: white;
+}
+
+.product-backdrop:hover {
+  opacity: 1;
+}
+
+.owl-item a {
+   width: 100%;
+}
 
 .owl-carousel .owl-item img {
+   max-width: inherit !important;
    width: auto !important;
    height: 450px !important;
 }

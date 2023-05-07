@@ -268,15 +268,17 @@ const createProductCart = (product, id) => {
         const productHTML = `
               ${hasEngraving ? engravingIcon : ''}
                  <img src="${product?.images[0].slice(6,)}" style="width: 100%;" >
-                 ${address ?
-                ` 
-                        ${product?.variants?.length === 0 ? '<p class="product-unavailable">Unavailable Product</p>' : ''}
-                        <h3 class="product-price">$ ${minimumPrice}</h3>
-                `
-                :
-                `<p class="product-no-address">Insert Address to Check Availability</p>`
-            }
-            <b>${product?.name}</b>
+                 <div class="product-backdrop">
+                        <b>${product?.name}</b>
+                        ${address ?
+                        ` 
+                                ${product?.variants?.length === 0 ? '<p class="product-unavailable">Unavailable Product</p>' : ''}
+                                <h3 class="product-price">$ ${minimumPrice}</h3>
+                        `
+                        :
+                        `<p class="product-no-address">Insert Address to Check Availability</p>`
+                    }
+                 </div>
                 `;
 
         [...productCards].forEach(productCard =>{
