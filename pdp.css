@@ -407,6 +407,11 @@ label[for="engraving-checkbox"] {
    align-items: center;
 }
 
+.owl-carousel .owl-item img {
+   width: auto !important;
+   height: 450px !important;
+}
+
 @media only screen and (max-width: 992px) {
    #product-info {
       padding: 0;
