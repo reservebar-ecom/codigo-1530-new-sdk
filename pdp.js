@@ -223,6 +223,8 @@ const addToCart = async () => {
     hideLoader();
 }
 
+
+
 // Carousel
 
 const prePopulateCarousel = () => {
@@ -234,25 +236,24 @@ const prePopulateCarousel = () => {
 
     const productGrouping = document.createElement('div');
     productGrouping.classList.add('item');
+    const baseURL = 'product';
 
     carousel.innerHTML = `${groups[group].ids.map(id => `
-        <div liquid-id="${id}" class="item">
+        <a target="_blank" liquid-id="${id}" 
+        href="${baseURL}?groupingId=${id}&group=${group}" 
+        class="item product-card">
             ${id}
-        </div>
+        </a>
         `).join('')
         }`;
 }
+
 
 const createProductCart = (product, id) => {
 
     if (product) {
         const address = getState('address');
-        const baseURL = 'product';
         const productCards = document.querySelectorAll(`[liquid-id="${id}"].item`);
-
-        const queryString = window.location.search;
-        const urlParams = new URLSearchParams(queryString);
-        const group = urlParams.get('group');
 
         const prices = product?.variants?.map(variant =>
             variant.retailers.map(retailer =>
@@ -261,33 +262,24 @@ const createProductCart = (product, id) => {
         )[0];
 
         const minimumPrice = prices ? Math.min(...prices) : '';
+
         const hasEngraving = [...new Set(product.variants.map(variant => variant.availability).flat())].some(e => e == 'engraved');
 
         const productHTML = `
-    <div class="uk-dark">
-            <a class="el-item uk-inline-clip uk-transition-toggle uk-link-toggle" tabindex="0"
-                href="${baseURL}?groupingId=${id}&group=${group}">
-                    <img class="el-image uk-transition-scale-up uk-transition-opaque" alt=""
-                            data-sizes="(min-width: 500px) 500px" data-width="500" data-height="825" uk-img=""
-                            sizes="(min-width: 500px) 500px"
-                            src="${product?.images[0].slice(6,)}">
-                    <div class="uk-overlay-default uk-transition-fade uk-position-cover"></div>
-                    <div class="uk-position-center">
-                            <div class="uk-overlay uk-transition-fade uk-margin-remove-first-child">
-                                    <h2 class="el-title uk-margin-top uk-margin-remove-bottom"> ${hasEngraving ? 'engraving' : ''} </h2>
-                                    <div class="el-meta uk-h5 uk-text-muted uk-margin-top uk-margin-remove-bottom">
-                                    $ ${minimumPrice}</div>
-                                    <div class="uk-margin-top">
-                                            <div class="el-link uk-button uk-button-default">Buy ${product?.name}
-                                            </div>
-                                    </div>
-                            </div>
-                    </div>
-            </a>
-    </div>
-    `;
+              ${hasEngraving ? engravingIcon : ''}
+                 <img src="${product?.images[0].slice(6,)}" style="width: 100%;" >
+                 ${address ?
+                ` 
+                        ${product?.variants?.length === 0 ? '<p class="product-unavailable">Unavailable Product</p>' : ''}
+                        <h3 class="product-price">$ ${minimumPrice}</h3>
+                `
+                :
+                `<p class="product-no-address">Insert Address to Check Availability</p>`
+            }
+            <b>${product?.name}</b>
+                `;
 
-        [...productCards].forEach(productCard => {
+        [...productCards].forEach(productCard =>{
             productCard.innerHTML = productHTML;
         })
     }
@@ -393,7 +385,7 @@ engravingEdit.onclick = () => {
 // PRODUCT Event Listener
 window.addEventListener('products', function (e) {
     const products = getState('products');
-    products.forEach(product => createProductCart(product, product.id));
+    products.forEach(product =>createProductCart(product, product.id));
 
     const groupingId = getState('grouping_id');
     const product = products.find(product => product.id == groupingId);
