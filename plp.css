@@ -36,10 +36,12 @@
 
 .product-card {
     position: relative;
+    text-decoration: none;
+    color: #111;
 }
 
 .product-card h3 {
-    margin-top: .5rem;
+    margin: .5rem 0;
 }
 
 .product-image {

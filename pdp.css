@@ -401,6 +401,12 @@ label[for="engraving-checkbox"] {
    display: none;
 }
 
+.owl-item {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
 @media only screen and (max-width: 992px) {
    #product-info {
       padding: 0;

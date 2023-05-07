@@ -112,7 +112,7 @@ const renderPDP = (product) => {
         document.querySelector('#product-img-mobile').src = `${productVariant?.images[0] || product.images[0]}`;
 
         const sizeSelector = document.querySelector('#size-selector');
-        if(product.variants.length){
+        if (product.variants.length) {
             sizeSelector.classList.add('visible');
             sizeSelector.innerHTML = product.variants.map(variant =>
                 `<option value="${variant.productId}">${variant.size}</option>`
@@ -182,14 +182,14 @@ const renderPDP = (product) => {
 
                 // ENGRAVING - adjust lines and chars limit for engraving
                 const productId = document.querySelector('#size-selector').value;
-                const variant = product.variants.find(variant => variant.productId == productId );
+                const variant = product.variants.find(variant => variant.productId == productId);
                 const engravingLines = variant.engravingConfigs.lines;
                 const engravingChars = variant.engravingConfigs.characters;
                 const engravingInputs = [...document.querySelector('#engraving-inputs').querySelectorAll('input')];
 
-                engravingInputs.map((engravingInput, i) =>{
+                engravingInputs.map((engravingInput, i) => {
                     engravingInput.maxlength = engravingChars;
-                    if(i+1 > engravingLines){
+                    if (i + 1 > engravingLines) {
                         engravingInput.style.display = 'none';
                     }
                 });
@@ -214,7 +214,7 @@ const renderPDP = (product) => {
 const addToCart = async () => {
     showLoader();
     const retailerOption = document.querySelector('div.variant.enabled');
-    if(retailerOption){
+    if (retailerOption) {
         const variantId = retailerOption.querySelector('input:checked').value;
         const quantity = document.querySelector(`select.qty-selector.enabled`).value;
         const engravingOptions = document.querySelector('#engraving-checkbox').checked && getState('engraving');
@@ -223,19 +223,97 @@ const addToCart = async () => {
     hideLoader();
 }
 
+// Carousel
+
+const prePopulateCarousel = () => {
+    const carousel = document.querySelector('#pdp-carousel');
+
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const group = urlParams.get('group');
+
+    const productGrouping = document.createElement('div');
+    productGrouping.classList.add('item');
+
+    carousel.innerHTML = `${groups[group].ids.map(id => `
+        <div liquid-id="${id}" class="item">
+            ${id}
+        </div>
+        `).join('')
+        }`;
+}
+
+const createProductCart = (product, id) => {
+
+    if (product) {
+        const address = getState('address');
+        const baseURL = 'product';
+        const productCards = document.querySelectorAll(`[liquid-id="${id}"].item`);
+
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        const group = urlParams.get('group');
+
+        const prices = product?.variants?.map(variant =>
+            variant.retailers.map(retailer =>
+                parseFloat(retailer.price)
+            )
+        )[0];
+
+        const minimumPrice = prices ? Math.min(...prices) : '';
+        const hasEngraving = [...new Set(product.variants.map(variant => variant.availability).flat())].some(e => e == 'engraved');
+
+        const productHTML = `
+    <div class="uk-dark">
+            <a class="el-item uk-inline-clip uk-transition-toggle uk-link-toggle" tabindex="0"
+                href="${baseURL}?groupingId=${id}&group=${group}">
+                    <img class="el-image uk-transition-scale-up uk-transition-opaque" alt=""
+                            data-sizes="(min-width: 500px) 500px" data-width="500" data-height="825" uk-img=""
+                            sizes="(min-width: 500px) 500px"
+                            src="${product?.images[0].slice(6,)}">
+                    <div class="uk-overlay-default uk-transition-fade uk-position-cover"></div>
+                    <div class="uk-position-center">
+                            <div class="uk-overlay uk-transition-fade uk-margin-remove-first-child">
+                                    <h2 class="el-title uk-margin-top uk-margin-remove-bottom"> ${hasEngraving ? 'engraving' : ''} </h2>
+                                    <div class="el-meta uk-h5 uk-text-muted uk-margin-top uk-margin-remove-bottom">
+                                    $ ${minimumPrice}</div>
+                                    <div class="uk-margin-top">
+                                            <div class="el-link uk-button uk-button-default">Buy ${product?.name}
+                                            </div>
+                                    </div>
+                            </div>
+                    </div>
+            </a>
+    </div>
+    `;
+
+        [...productCards].forEach(productCard => {
+            productCard.innerHTML = productHTML;
+        })
+    }
+}
+
 const loadLiquid = async () => {
+
+    // Pre-populate Carousel
+    prePopulateCarousel();
 
     // Initialize Liquid
     const liquid = await new Liquid({ clientId: 'eefe7f3c5f2323e30fd42ea2e8091d09', env: 'staging' }); window.liquid = liquid;
 
-    // Grouping ID
+    // Grouping IDs
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
     const groupingId = urlParams.get('groupingId');
-    setState({ name: 'grouping_ids', value: [groupingId] });
+    const group = urlParams.get('group');
+    const groupingIdValues = groups[group].ids;
+
+    setState({ name: 'grouping_id', value: groupingId });
+    setState({ name: 'grouping_ids', value: groupingIdValues });
+
+    // Dispatch Address Event
     window.dispatchEvent(new Event('address'));
 }
-
 
 // Initialize
 
@@ -315,6 +393,9 @@ engravingEdit.onclick = () => {
 // PRODUCT Event Listener
 window.addEventListener('products', function (e) {
     const products = getState('products');
-    const product = products[0];
+    products.forEach(product => createProductCart(product, product.id));
+
+    const groupingId = getState('grouping_id');
+    const product = products.find(product => product.id == groupingId);
     renderPDP(product);
 });   

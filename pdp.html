@@ -1,8 +1,17 @@
 <!-- Liquid SDK -->
 <script type="text/javascript" src="https://sdk.liquidcloud.app/liquid-sdk.js"></script>
 <link rel="stylesheet" href="pdp.css">
+<link rel="stylesheet" href="plp.css">
 <link rel="stylesheet" href="cart.css">
 <link rel="stylesheet" href="address-popup.css">
+
+<!-- Carousel  -->
+<link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.0.0-beta.3/assets/owl.carousel.min.css">
+<link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.0.0-beta.3/assets/owl.theme.default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.0.0-beta.3/owl.carousel.min.js"></script>
 
 <!-- Address Input  -->
 <div class="popup-button-wrapper">
@@ -36,8 +45,6 @@
     <div id="product-info">
         <h2 id="product-name"></h2>
         <img id="product-img-mobile" src="">
-
-
         <div id="variants"></div>
         <div id="engraving">
             <div class="engraving-header">
@@ -96,6 +103,9 @@
     <div id="cart-backdrop"></div>
 </div>
 
+<!-- CAROUSEL  -->
+<div id="pdp-carousel" class="owl-carousel owl-theme"></div>
+
 <!-- LOADER  -->
 <div id="loader">
     <div class="lds-roller">
@@ -114,3 +124,20 @@
 <script type="text/javascript" src="cart.js"></script>
 <script type="text/javascript" src="address-popup.js"></script>
 <script type="text/javascript" src="pdp.js"></script>
+<script>
+    $('.owl-carousel').owlCarousel({
+        loop: true,
+        margin: 10,
+        responsive: {
+            0: {
+                items: 1
+            },
+            600: {
+                items: 3
+            },
+            1000: {
+                items: 6
+            }
+        }
+    })
+</script>
