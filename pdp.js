@@ -229,27 +229,29 @@ const addToCart = async () => {
 
 const prePopulateCarousel = () => {
     const carousel = document.querySelector('#pdp-carousel');
-
+    
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
     const group = urlParams.get('group');
 
     const productGrouping = document.createElement('div');
     productGrouping.classList.add('item');
-    const baseURL = 'product';
 
     carousel.innerHTML = `${groups[group].ids.map(id => `
-        <a target="_blank" liquid-id="${id}" 
-        href="${baseURL}?groupingId=${id}&group=${group}" 
-        class="item product-card">
+        <div liquid-id="${id}" class="item product-card"> 
             ${id}
-        </a>
+        </div>
         `).join('')
         }`;
 }
 
 
 const createProductCart = (product, id) => {
+
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const group = urlParams.get('group');
+    const baseURL = 'product';
 
     if (product) {
         const address = getState('address');
@@ -271,13 +273,16 @@ const createProductCart = (product, id) => {
                  <div class="product-backdrop">
                         <b>${product?.name}</b>
                         ${address ?
-                        ` 
-                                ${product?.variants?.length === 0 ? '<p class="product-unavailable">Unavailable Product</p>' : ''}
-                                <h3 class="product-price">$ ${minimumPrice}</h3>
-                        `
-                        :
-                        `<p class="product-no-address">Insert Address to Check Availability</p>`
-                    }
+                            ` 
+                                    ${product?.variants?.length === 0 ? '<p class="product-unavailable">Unavailable Product</p>' : ''}
+                                    <h3 class="product-price">$ ${minimumPrice}</h3>
+                            `
+                            :
+                            `<p class="product-no-address">Insert Address to Check Availability</p>`
+                         }
+                    <a class="el-content uk-button uk-button-default" target="_blank" href="${baseURL}?groupingId=${id}&group=${group}">
+                        Buy Now
+                    </a>
                  </div>
                 `;
 
