@@ -59,7 +59,7 @@ const groups = {
     gifts: {
         name: "Gifts",
         ids: [
-            "GROUPING-BUNDLE-200000071",
+            "BUNDLE-200000071",
             "GROUPING-GIFTCARD-1973621"
         ]
     }

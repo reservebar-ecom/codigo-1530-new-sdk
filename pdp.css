@@ -411,6 +411,10 @@ label[for="engraving-checkbox"] {
    width: 100%;
 }
 
+.item.product-card a {
+   width: 110px;
+}
+
 .product-backdrop {
    position: absolute;
    width: 100%;
@@ -427,7 +431,7 @@ label[for="engraving-checkbox"] {
 
 .product-backdrop:hover {
   opacity: 1;
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(255, 255, 255, 0.66);
 }
 
 .owl-item a {
