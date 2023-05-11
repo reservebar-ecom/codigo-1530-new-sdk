@@ -61,7 +61,7 @@ const createProductCart = (product, id) => {
 (async () => {
     prePopulateCards();
 
-    const liquid = await new Liquid({ clientId: '81751648f545a97274df4e2782d01a70' });
+    const liquid = await Liquid({ clientId: '81751648f545a97274df4e2782d01a70' });
     window.liquid = liquid;
 
     const liquidIdEls = document.querySelectorAll('[liquid-id]');
