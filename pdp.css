@@ -91,7 +91,7 @@ button {
 .variant-option span {
    font-size: 1.5rem;
    font-family: 'Barlow Semi Condensed';
-   margin-right: 1rem;
+   margin: 0 1rem;
 }
 
 .variant-id {
