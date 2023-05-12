@@ -135,7 +135,7 @@ const checkout = async () => {
     const cart = getState('cart');
     const address = getState('address');
     const placeId = address.placeId;
-    if(!liquid){
+    if(!window.liquid){
         await setLiquid();
     }
     const addressObj = await liquid.address({ placeId: placeId });

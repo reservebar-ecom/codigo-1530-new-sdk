@@ -45,7 +45,7 @@ addressInput.oninput = async (e) => {
 
             const addressSearch = e.target.value;
             if (addressSearch.trim()) {
-                if(!liquid){
+                if(!window.liquid){
                     await setLiquid();
                 }
                 const addressSuggestions = await liquid.address({ search: addressSearch });
@@ -96,7 +96,7 @@ window.addEventListener('address', async function (e) {
     let addressObj = null;
 
     if(address?.placeId){
-        if(!liquid){
+        if(!window.liquid){
             await setLiquid();
         }
         addressObj = await liquid.address({ placeId: address?.placeId });
@@ -104,7 +104,7 @@ window.addEventListener('address', async function (e) {
     const groupingIds = getState('grouping_ids');
 
     if(groupingIds){
-        if(!liquid){
+        if(!window.liquid){
             await setLiquid();
         }
 
