@@ -409,6 +409,11 @@ label[for="engraving-checkbox"] {
 .item.product-card {
    position: relative;
    width: 100%;
+   height: 400px;
+
+   background-position: center;
+   background-repeat: no-repeat; 
+   background-size: contain;
 }
 
 .item.product-card a {
