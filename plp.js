@@ -27,6 +27,7 @@ const createProductCart = (product, id) => {
     if (product) {
         const address = getState('address');
         const productCards = document.querySelectorAll(`[liquid-id="${id}"]`);
+        const isGiftCard = product.id.includes('GIFTCARD');
 
         const prices = product?.variants?.map(variant =>
             variant?.retailers?.map(retailer =>
@@ -34,7 +35,10 @@ const createProductCart = (product, id) => {
             )
         )[0];
 
-        const minimumPrice = prices ? Math.min(...prices) : '';
+        console.log(product);
+
+        const minimumPrice = prices ? `<h3 class="product-price">$ ${Math.min(...prices)}</h3>` : '';
+        const giftCardValues = isGiftCard ? product.variants.map(v => `<span class="gift-card-value">$${v.price}</span>`).join('') : '';
 
         const hasEngraving = [...new Set(product.variants.map(variant => variant.availability).flat())].some(e => e == 'engraved');
 
@@ -44,7 +48,10 @@ const createProductCart = (product, id) => {
                  ${address ?
                 ` 
                         ${product?.variants?.length === 0 ? '<p class="product-unavailable">Unavailable Product</p>' : ''}
-                        <h3 class="product-price">$ ${minimumPrice}</h3>
+                        ${minimumPrice}
+                        <div class="gift-card-values">
+                            ${giftCardValues}
+                        </div>
                 `
                 :
                 `<p class="product-no-address">Insert Address to Check Availability</p>`

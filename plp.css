@@ -93,6 +93,19 @@
     opacity: .3;
 }
 
+.gift-card-values {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.gift-card-value {
+    margin: .25rem;
+    padding: .125rem .5rem;
+    border: 1px solid lightgray;
+}
+
 @media only screen and (max-width: 768px) {
     [liquid-id] {
         width: 100%;
