@@ -250,7 +250,6 @@ const carouselCard = (product, id) => {
     const urlParams = new URLSearchParams(queryString);
     const group = urlParams.get('group');
     const baseURL = 'product';
-    console.log('set ');
 
     if (product) {
         const address = getState('address');
@@ -263,10 +262,7 @@ const carouselCard = (product, id) => {
         )[0];
 
         const minimumPrice = prices ? Math.min(...prices) : '';
-        const hasEngraving = [...new Set(product.variants.map(variant => variant.availability).flat())].some(e => e == 'engraved');
-
         const productHTML = `
-              ${hasEngraving ? engravingIcon : ''}
                  <div class="product-backdrop">
                         <b>${product?.name}</b>
                         ${address ?

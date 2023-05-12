@@ -413,7 +413,7 @@ label[for="engraving-checkbox"] {
 
    background-position: center;
    background-repeat: no-repeat; 
-   background-size: contain;
+   background-size: cover;
 }
 
 .item.product-card a {
