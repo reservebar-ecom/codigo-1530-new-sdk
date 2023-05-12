@@ -45,6 +45,9 @@ addressInput.oninput = async (e) => {
 
             const addressSearch = e.target.value;
             if (addressSearch.trim()) {
+                if(!liquid){
+                    await setLiquid();
+                }
                 const addressSuggestions = await liquid.address({ search: addressSearch });
 
                 // Clear previous suggestions
@@ -93,11 +96,17 @@ window.addEventListener('address', async function (e) {
     let addressObj = null;
 
     if(address?.placeId){
+        if(!liquid){
+            await setLiquid();
+        }
         addressObj = await liquid.address({ placeId: address?.placeId });
     }
     const groupingIds = getState('grouping_ids');
 
     if(groupingIds){
+        if(!liquid){
+            await setLiquid();
+        }
 
         const products = await liquid.product({
             ids: groupingIds,

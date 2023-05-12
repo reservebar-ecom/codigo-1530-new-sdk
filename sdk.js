@@ -1,6 +1,10 @@
-(async () => {
+const setLiquid = async () => {
     const liquid = await Liquid({ clientId: '81751648f545a97274df4e2782d01a70' });
     window.liquid = liquid;
+}
+
+(async () => {
+    await setLiquid();
 })();
 
 const setState = ({ name, value }) => {
