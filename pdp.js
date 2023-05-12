@@ -74,14 +74,20 @@ const renderPDP = (product) => {
             shipped: 'Get it Shipped',
             engraved: 'Get it Shipped'
         }
+        const engravingElement = document.querySelector('#engraving');
 
         document.querySelector('#variants').innerHTML = variants.map((variant, index) => {
             let variantRetailers = getVariantRetailers(variant);
-
+            
             return `
                   <div class="variant ${index == 0 && 'enabled'}" size="${variant.size}">
                     ${variantRetailers.map((variant, i) =>
-                `
+                {
+                    if (i == 0 && index == 0 && variant.type == 'engraved') {
+                        engravingElement.classList.add('active');
+                    } 
+                            
+                    return `
                     <div class="variant-option ${index == 0 && i == 0 ? 'selected' : ''}">
                         <div style="width:100%">
                         <div class="retailer-type-and-price">
@@ -100,7 +106,7 @@ const renderPDP = (product) => {
                             </p>
                         </div>
                     </div>
-            `
+            `}
             ).join('')
                 }
                   </div>
@@ -157,13 +163,7 @@ const renderPDP = (product) => {
         // Show or hide engraving for first variant
         const productRetailer = productVariant?.retailers[0];
         const hasEngraving = productRetailer?.type == 'engraved';
-        const engravingElement = document.querySelector('#engraving');
-        if (hasEngraving) {
-            engravingElement.classList.add('active');
-        } else {
-            engravingElement.classList.remove('active');
-        }
-
+   
         // On variant id block click
         const variantIdBlocks = [...document.querySelectorAll('.variant-option')];
         [...variantIdBlocks].forEach(variantIdBlock =>
