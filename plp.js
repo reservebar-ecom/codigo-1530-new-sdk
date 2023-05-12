@@ -39,8 +39,8 @@ const createProductCart = (product, id) => {
         const hasEngraving = [...new Set(product.variants.map(variant => variant.availability).flat())].some(e => e == 'engraved');
 
         const productHTML = `
-              ${hasEngraving ? engravingIcon : ''}
                  <img src="${product?.images?.length ? product?.images[0].slice(6,) : ''}" style="width: 100%;" >
+                 ${hasEngraving ? engravingIcon : ''}
                  ${address ?
                 ` 
                         ${product?.variants?.length === 0 ? '<p class="product-unavailable">Unavailable Product</p>' : ''}
