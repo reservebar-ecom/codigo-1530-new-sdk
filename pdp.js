@@ -291,10 +291,6 @@ const loadLiquid = async () => {
     // Pre-populate Carousel
     prePopulateCarousel();
 
-    // Initialize Liquid
-    const liquid = await Liquid({ clientId: '81751648f545a97274df4e2782d01a70' });
-    window.liquid = liquid;
-
     // Grouping IDs
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);

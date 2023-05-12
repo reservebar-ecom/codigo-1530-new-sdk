@@ -1,3 +1,8 @@
+(async () => {
+    const liquid = await Liquid({ clientId: '81751648f545a97274df4e2782d01a70' });
+    window.liquid = liquid;
+})();
+
 const setState = ({ name, value }) => {
     window.localStorage.setItem(`_liquid_${name}`, JSON.stringify(value));
     window.dispatchEvent(new Event(name));
