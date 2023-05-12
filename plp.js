@@ -29,7 +29,7 @@ const createProductCart = (product, id) => {
         const productCards = document.querySelectorAll(`[liquid-id="${id}"]`);
 
         const prices = product?.variants?.map(variant =>
-            variant.retailers.map(retailer =>
+            variant?.retailers?.map(retailer =>
                 parseFloat(retailer.price)
             )
         )[0];
@@ -40,7 +40,7 @@ const createProductCart = (product, id) => {
 
         const productHTML = `
               ${hasEngraving ? engravingIcon : ''}
-                 <img src="${product?.images[0].slice(6,)}" style="width: 100%;" >
+                 <img src="${product?.images?.length ? product?.images[0].slice(6,) : ''}" style="width: 100%;" >
                  ${address ?
                 ` 
                         ${product?.variants?.length === 0 ? '<p class="product-unavailable">Unavailable Product</p>' : ''}
