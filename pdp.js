@@ -85,8 +85,10 @@ const renderPDP = (product) => {
                     <div class="variant-option ${index == 0 && i == 0 ? 'selected' : ''}">
                         <div style="width:100%">
                         <div class="retailer-type-and-price">
+                            <div class="retailer-type">
                             <h5>${typeMap[variant.type]}</h5>
                             ${variant.type == 'engraved' ? '<span class="engraving-badge">engraving</span>' : ''}
+                            </div>
                             <span>$${variant.price}</span>
                         </div>
                             <input class="variant-id" name="variant-${index}" type="radio" value="${variant.variantId}" id="${variant.variantId}" engraving="${variant.type == 'engraved'}" ${i == 0 ? 'checked' : ''}/>

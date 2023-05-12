@@ -105,6 +105,11 @@ button {
    width: 100%;
 }
 
+.retailer-type {
+   display: flex;
+   align-items: center;
+}
+
 #atc {
    display: none;
    border: 1px solid black;
