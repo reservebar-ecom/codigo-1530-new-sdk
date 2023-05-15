@@ -44,7 +44,11 @@ const cartItemHTML = (cartItem) => {
                 ${cartItem.deliveryExpectation ?
             `<p class="cart-item-expectation">${cartItem.deliveryExpectation}</p>` : ''
         }
-                <p class="cart-item-volume">${cartItem.product.volume.toUpperCase()} ${cartItem.product.containerType}</p> 
+        ${
+            cartItem?.product?.volume ?
+           `<p class="cart-item-volume">${cartItem.product.volume.toUpperCase()} ${cartItem.product.containerType}</p>` :
+            ''
+        }
                 <div class="cart-qty-wrapper"> 
                     <select onchange="updateCartItem({variantId: ${cartItem.product.id}, quantity: this.value})" name="qty" id="qty-${cartItem.identifier}">
                         ${[...Array(cartItem.product.inStock).keys()].map(index =>
@@ -144,6 +148,8 @@ const checkout = async () => {
         cartId: cart.id,
         address: addressObj
     });
+
+    console.log(' >checkoutObj',checkoutObj);
 
     window.open(
         checkoutObj.url,
