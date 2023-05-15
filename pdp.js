@@ -2,7 +2,7 @@ const getVariantRetailers = (variant) => {
 
     const retailerTypes = ["on_demand", "engraved", "shipped"];
     const variantRetailers = retailerTypes.map(type => {
-        return variant.retailers.filter(e => e.type == type).sort((a, b) => parseFloat(a.price) - parseFloat(b.price))[0];
+        return variant?.retailers?.filter(e => e.type == type).sort((a, b) => parseFloat(a.price) - parseFloat(b.price))[0];
     }).filter(e => e);
 
     const variantRetailersUniqueID = [...new Set(variantRetailers.map(v => v.variantId))].map(id => variantRetailers.find(v => v.variantId == id));
@@ -116,8 +116,8 @@ const renderPDP = (product) => {
         document.querySelector('#product-description').innerHTML = product.descriptionHtml;
         document.querySelector('#product-name').innerText = product.name;
         const productVariant = product.variants[0];
-        document.querySelector('#product-img').src = `${productVariant?.images[0] || product.images[0]}`;
-        document.querySelector('#product-img-mobile').src = `${productVariant?.images[0] || product.images[0]}`;
+        document.querySelector('#product-img').src = `${productVariant?.images?.find(e=>!!e) || product?.images?.find(e=>!!e)}`;
+        document.querySelector('#product-img-mobile').src = `${productVariant?.images?.find(e=>!!e) || product.images?.find(e=>!!e)}`;
 
         const sizeSelector = document.querySelector('#size-selector');
         if (product.variants.length) {
@@ -161,7 +161,7 @@ const renderPDP = (product) => {
         }
 
         // Show or hide engraving for first variant
-        const productRetailer = productVariant?.retailers[0];
+        const productRetailer = productVariant?.retailers?.find(e=>!!e);
         const hasEngraving = productRetailer?.type == 'engraved';
    
         // On variant id block click
@@ -258,10 +258,12 @@ const carouselCard = (product, id) => {
         const id = product.id;
         const productCard = document.querySelector(`[liquid-id="${id}"].item`);
         const prices = product?.variants?.map(variant =>
-            variant.retailers.map(retailer =>
+            variant?.retailers?.map(retailer =>
                 parseFloat(retailer.price)
             )
         )[0];
+
+        console.log(product);
 
         const minimumPrice = prices ? Math.min(...prices) : '';
         const productHTML = `
@@ -281,7 +283,7 @@ const carouselCard = (product, id) => {
                  </div>
                 `;
 
-        productCard.style.backgroundImage = `url(${product?.images[0].slice(6,)})`;
+        productCard.style.backgroundImage = `url(${product?.images?.length ? product?.images[0].slice(6,) : ''})`;
         productCard.innerHTML = productHTML;
     }
 }
