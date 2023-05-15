@@ -1,0 +1,25 @@
+#giftcard {
+    display: flex;
+    justify-content: center;
+}
+
+.giftcard-content {
+    display: flex;
+    margin: 4rem;
+}
+
+.giftcard-values {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.giftcard-info{
+    display: flex;
+    flex-direction: column;
+}
+
+.input-wrapper {
+    display: flex;
+    flex-direction: column;
+    margin: 1rem 0;
+}
