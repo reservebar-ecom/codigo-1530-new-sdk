@@ -149,8 +149,6 @@ const checkout = async () => {
         address: addressObj
     });
 
-    console.log(' >checkoutObj',checkoutObj);
-
     window.open(
         checkoutObj.url,
         '_blank'

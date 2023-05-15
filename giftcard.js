@@ -128,13 +128,20 @@ const renderGiftCard = (product) => {
     giftcardImg.src = product.images[0];
 
     // Gift Card ATC
-    const addGiftcard = document.querySelector('#add-giftcard');
+    const addGiftcard = document.querySelector('#giftcard-atc');
     addGiftcard.addEventListener('click', async function(){
         const cart = getState('cart');
+
         const variantId = document.querySelector('input[name=gitfcard-value]:checked').value;
+        const message = document.querySelector('#giftcard-message').value;
+        const sender = document.querySelector('#giftcard-sender').value;
+        const sendDate = document.querySelector('#giftcard-sendDate').value;
+        const recipients = document.querySelector('#giftcard-recipients').value;
+
         if(!window.liquid){
             await setLiquid();
         }
+
         const updatedCart = await liquid.cart({
             ...(cart && { id: cart.id }),
             cartItems: [
@@ -142,10 +149,10 @@ const renderGiftCard = (product) => {
                     variantId: `${variantId}`,
                     quantity: 1,
                     options: {
-                        message: 'Happy Bday',
-                        recipients: 'lucas@email.com',
-                        sender:'lucas',
-                        sendDate:'01-01-2023'
+                        message: message,
+                        recipients: recipients,
+                        sender: sender,
+                        sendDate: sendDate
                     }
                 }
             ],
