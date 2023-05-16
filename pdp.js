@@ -263,8 +263,6 @@ const carouselCard = (product, id) => {
             )
         )[0];
 
-        console.log(product);
-
         const minimumPrice = prices ? Math.min(...prices) : '';
         const productHTML = `
                  <div class="product-backdrop">

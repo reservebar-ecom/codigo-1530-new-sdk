@@ -48,8 +48,6 @@ const carouselCard = (product, id) => {
             )
         )[0];
 
-        console.log(product);
-
         const minimumPrice = prices ? Math.min(...prices) : '';
         const productHTML = `
                  <div class="product-backdrop">
@@ -103,11 +101,9 @@ const loadLiquid = async () => {
 })();
 
 const createGiftCardValue = (variant, index) => {
-    const el = document.createElement('div');
-    el.classList.add('giftcard-value');
+    const el = document.createElement('option');
     el.innerHTML = `
-        <input type="radio" value="${variant.id}" id="value-${variant.id}" name="gitfcard-value" ${index==0?'checked':''}>
-        <label for="value-${variant.id}">$${variant.price}0</label>
+        <option value="${variant.id}">$${variant.price}0</option>
     `;
 
     return el;
@@ -119,8 +115,9 @@ const renderGiftCard = (product) => {
     // Gift Card Values
     const giftcardValues = document.querySelector('#giftcard-values');
     product.variants.reverse().forEach((variant, i) => {
-        const giftCardValue = createGiftCardValue(variant, i);
-        giftcardValues.append(giftCardValue);
+        giftcardValues.innerHTML += `
+        <option value="${variant.id}">$${variant.price}0</option>
+    `;
     });
 
     // Gift Card Image
@@ -132,7 +129,7 @@ const renderGiftCard = (product) => {
     addGiftcard.addEventListener('click', async function(){
         const cart = getState('cart');
 
-        const variantId = document.querySelector('input[name=gitfcard-value]:checked').value;
+        const variantId = document.querySelector('#giftcard-values').value;
         const message = document.querySelector('#giftcard-message').value;
         const sender = document.querySelector('#giftcard-sender').value;
         const sendDate = document.querySelector('#giftcard-sendDate').value;
@@ -162,13 +159,12 @@ const renderGiftCard = (product) => {
     });
 }
  
-
 // PRODUCT Event Listener
 window.addEventListener('products', function (e) {
     const products = getState('products');
-    products.forEach(product => carouselCard(product, product.id));
+    // products?.forEach(product => carouselCard(product, product.id));
 
     const groupingId = getState('grouping_id');
-    const product = products.find(product => product.id == groupingId);
+    const product = products?.find(product => product.id == groupingId);
     renderGiftCard(product);
 });   

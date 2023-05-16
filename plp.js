@@ -35,8 +35,6 @@ const createProductCart = (product, id) => {
             )
         )[0];
 
-        console.log(product);
-
         const minimumPrice = prices ? `<h3 class="product-price">$ ${Math.min(...prices)}</h3>` : '';
         const giftCardValues = isGiftCard ? product.variants.map(v => `<span class="gift-card-value">$${v.price}</span>`).join('') : '';
 
