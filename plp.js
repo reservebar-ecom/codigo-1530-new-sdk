@@ -8,10 +8,11 @@ const prePopulateCards = () => {
         const productGrouping = document.createElement('div');
         productGrouping.classList.add('product-grouping');
         const baseURL = 'product';
+        const gcURL = 'giftcard';
 
         productGrouping.innerHTML = `${groups[group].ids.map(id => `
             <a liquid-id="${id}" 
-            href="${baseURL}?groupingId=${id}&group=${group}" 
+            href="${id.includes('GIFTCARD') ? gcURL : baseURL }?groupingId=${id}&group=${group}" 
             class="product-card">
            </a>
             `).join('')
