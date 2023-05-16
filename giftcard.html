@@ -14,33 +14,37 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.0.0-beta.3/owl.carousel.min.js"></script>
 
 <!-- Gift Card content  -->
+<h1 class="giftcard-title">Código Gift Card</h1>
 <div id="giftcard">
     <div class="giftcard-content">
         <div class="img">
             <img id="giftcard-img" src="">
         </div>
         <div class="giftcard-info">
-            
+
             <div class="input-wrapper">
                 <label>Recipient Email</label>
-                <input type="email" id="giftcard-recipients">
+                <input type="email" id="giftcard-recipients" placeholder="email">
             </div>
             <div class="input-wrapper">
                 <label>Sender's Name</label>
-                <input type="text" id="giftcard-sender">
+                <input type="text" id="giftcard-sender" placeholder="from">
             </div>
-            <div class="input-wrapper">
-                <label>Send Date</label>
-                <input type="date" id="giftcard-sendDate">
+            <div class="date-value-wrapper">
+                <div class="input-wrapper">
+                    <label>Send Date</label>
+                    <input type="date" id="giftcard-sendDate">
+                </div>
+                <div class="input-wrapper">
+                    <label>Value</label>
+                    <select id="giftcard-values" name="giftcard-values"></select>
+                </div>
             </div>
             <div class="input-wrapper">
                 <label>Message</label>
                 <textarea id="giftcard-message"></textarea>
             </div>
-            <div class="giftcard-atc-wrapper">
-                <select id="giftcard-values" name="giftcard-values"></select>
-                <button id="giftcard-atc">Add To Cart</button>
-            </div>
+            <button class="el-content uk-button uk-button-default" id="giftcard-atc">Add To Cart</button>
         </div>
     </div>
 </div>
