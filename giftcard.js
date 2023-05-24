@@ -10,7 +10,6 @@ const addToCart = async () => {
     hideLoader();
 }
 
-
 // Carousel
 const prePopulateCarousel = () => {
     const carousel = document.querySelector('#pdp-carousel');
@@ -29,7 +28,6 @@ const prePopulateCarousel = () => {
         `).join('')
         }`;
 }
-
 
 const carouselCard = (product, id) => {
 
@@ -109,6 +107,28 @@ const createGiftCardValue = (variant, index) => {
     return el;
 }
 
+const validateEmail = (email) => {
+    return String(email)
+      .toLowerCase()
+      .match(
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      );
+  };
+
+const validateGiftCardInputs = () => {
+    const isRecipientValid = validateEmail(document.querySelector('#giftcard-recipients'));
+    const isSenderValid = document.querySelector('#giftcard-sender').length;
+    const isGiftCardValid = isRecipientValid && isSenderValid;
+
+    console.log(isGiftCardValid);
+
+    if(isGiftCardValid){
+        document.querySelector('#giftcard-atc').disabled = false;
+    }else{
+        document.querySelector('#giftcard-atc').disabled = true;
+    }
+}
+
 // Render Gift Card
 const renderGiftCard = (product) => {
 
@@ -123,6 +143,19 @@ const renderGiftCard = (product) => {
     // Gift Card Image
     const giftcardImg = document.querySelector('#giftcard-img');
     giftcardImg.src = product.images[0];
+
+    // Pre-set date as today
+    document.getElementById('giftcard-sendDate').valueAsDate = new Date();
+
+    // Validate Gift Card Inputs
+    document.querySelector('#giftcard-recipients').addEventListener('change', function(){
+        validateGiftCardInputs();
+    });
+
+    document.querySelector('#giftcard-sender').addEventListener('change', function(){
+        validateGiftCardInputs();
+    });
+
 
     // Gift Card ATC
     const addGiftcard = document.querySelector('#giftcard-atc');
