@@ -69,9 +69,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    position: absolute;
     width: 100%;
     top: calc(100% - 6rem);
+    margin-top: -23px;
 }
 
 .engraving-icon {

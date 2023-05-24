@@ -42,7 +42,6 @@ const createProductCard = (product, id) => {
         const hasEngraving = [...new Set(product.variants.map(variant => variant.availability).flat())].some(e => e == 'engraved');
         const imgSrc = product?.images?.length ? product?.images[0].slice(6,) : product.variants.find(variant => variant.images.length)?.images[0] || '';
 
-        console.log(product);
         const productHTML = `
                  <img src="${imgSrc}" style="width: 100%;" >
                  ${hasEngraving ? engravingIcon : ''}
