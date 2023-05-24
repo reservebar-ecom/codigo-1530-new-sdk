@@ -23,7 +23,7 @@ const prePopulateCards = () => {
     });
 }
 
-const createProductCart = (product, id) => {
+const createProductCard = (product, id) => {
 
     if (product) {
         const address = getState('address');
@@ -40,9 +40,11 @@ const createProductCart = (product, id) => {
         const giftCardValues = isGiftCard ? product.variants.map(v => `<span class="gift-card-value">$${v.price}</span>`).join('') : '';
 
         const hasEngraving = [...new Set(product.variants.map(variant => variant.availability).flat())].some(e => e == 'engraved');
+        const imgSrc = product?.images?.length ? product?.images[0].slice(6,) : product.variants.find(variant => variant.images.length)?.images[0] || '';
 
+        console.log(product);
         const productHTML = `
-                 <img src="${product?.images?.length ? product?.images[0].slice(6,) : ''}" style="width: 100%;" >
+                 <img src="${imgSrc}" style="width: 100%;" >
                  ${hasEngraving ? engravingIcon : ''}
                  ${address ?
                 ` 
@@ -81,6 +83,6 @@ window.addEventListener('products', async function (e) {
 
     groupingIds.forEach((groupingId, index) => {
         const product = products.find(p => p.id == groupingId);
-        createProductCart(product, groupingId);
+        createProductCard(product, groupingId);
     })
 });
