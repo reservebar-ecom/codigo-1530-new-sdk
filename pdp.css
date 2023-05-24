@@ -46,6 +46,7 @@ button {
    max-width: 600px;
    padding: 2rem;
    padding-right: 8rem;
+   padding-left: 0;
 }
 
 .img>img {
