@@ -98,7 +98,7 @@ const renderPDP = (product) => {
                             <span>$${variant.price}</span>
                         </div>
                             <input class="variant-id" name="variant-${index}" type="radio" value="${variant.variantId}" id="${variant.variantId}" engraving="${variant.type == 'engraved'}" ${i == 0 ? 'checked' : ''}/>
-                            <label for="${variant.variantId}">
+                            <label class="retailer-name" for="${variant.variantId}">
                                 ${variant.retailer.name}
                             </label>
                             <p class="retailer-delivery-expectation">
