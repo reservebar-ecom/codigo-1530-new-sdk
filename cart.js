@@ -11,7 +11,7 @@ const updateCartCountItems = (cart) => {
     }
 }
 
-const updateCartItem = async ({ variantId, quantity, engravingOptions, bundleId }) => {
+const updateCartItem = async ({ variantId, quantity, options, bundleId }) => {
 
     const cart = getState('cart');
     const updatedCart = await liquid.cart({
@@ -20,7 +20,7 @@ const updateCartItem = async ({ variantId, quantity, engravingOptions, bundleId 
             {
                 variantId: variantId,
                 quantity: quantity,
-                ...(engravingOptions && { options: engravingOptions }),
+                ...(options && { options: options }),
                 ...(bundleId && { bundleExternalId: bundleId })
             }
         ],
@@ -37,6 +37,18 @@ const deleteCartItem = async (identifier) => {
         identifier: identifier,
         variantId: cartItem.product.id, 
         quantity: 0, 
+        ...( cartItem?.itemOptions && {options: cartItem.itemOptions})
+    });
+}
+
+const updateCartItemQty = async ({identifier, quantity}) => {
+    const cart = getState('cart');
+    const cartItem = cart.cartItems.find(item => item.identifier == identifier );
+
+    await updateCartItem({ 
+        identifier: identifier,
+        variantId: cartItem.product.id, 
+        quantity: quantity, 
         ...( cartItem?.itemOptions && {options: cartItem.itemOptions})
     });
 }
@@ -59,7 +71,7 @@ const cartItemHTML = (cartItem) => {
             ''
         }
                 <div class="cart-qty-wrapper"> 
-                    <select onchange="updateCartItem({variantId: ${cartItem.product.id}, quantity: this.value})" name="qty" id="qty-${cartItem.identifier}">
+                    <select onchange="updateCartItemQty({identifier: ${cartItem.identifier}, quantity: this.value})" name="qty" id="qty-${cartItem.identifier}">
                         ${[...Array(cartItem.product.inStock).keys()].map(index =>
             `<option value="${index + 1}" ${cartItem.quantity == index + 1 ? 'selected="selected"' : ''}>${index + 1}</option>`
         ).join('')

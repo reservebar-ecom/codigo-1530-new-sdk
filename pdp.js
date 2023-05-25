@@ -228,8 +228,8 @@ const addToCart = async () => {
     if (retailerOption) {
         const variantId = retailerOption.querySelector('input:checked').value;
         const quantity = document.querySelector(`select.qty-selector.enabled`).value;
-        const engravingOptions = document.querySelector('#engraving-checkbox').checked && getState('engraving');
-        await updateCartItem({ variantId, quantity, engravingOptions });
+        const options = document.querySelector('#engraving-checkbox').checked && getState('engraving');
+        await updateCartItem({ variantId, quantity, options });
     }
     hideLoader();
 }
