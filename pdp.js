@@ -1,3 +1,70 @@
+
+// Engraving
+const engravingBody = document.querySelector('.engraving-body');
+const engravingLines = document.querySelector('#engraving').querySelectorAll('input[type="text"]');
+const engravingSave = document.querySelector('#engraving-save');
+const engravingEdit = document.querySelector('#engraving-edit');
+const engravingCancel = document.querySelector('#engraving-cancel');
+
+const clearEngravingLines = () => {
+    engravingBody.classList.remove('open');
+    document.querySelector('#engraving-checkbox').checked = false;
+    setState({ name: 'engraving', value: { line1: '', line2: '', line3: '', line4: '' } });
+    [...engravingLines].forEach(input => {
+        input.value = '';
+        input.readOnly = false;
+    });
+}
+
+document.querySelector('#engraving-checkbox').onchange = (e) => {
+    if (e.target.checked) {
+        engravingBody.classList.add('open')
+    } else {
+        clearEngravingLines();
+    }
+}
+
+engravingCancel.onclick = () => {
+    clearEngravingLines();
+}
+
+[...engravingLines].forEach(engravingLine => {
+    engravingLine.oninput = () => {
+        const engravingText = [...engravingLines].map(e => e.value.trim()).join(' ');
+
+        if (!engravingSave.classList.value.includes('active') && engravingText) {
+            engravingSave.disabled = false;
+        }
+
+        if (engravingText.trim().length == 0) {
+            engravingSave.disabled = true;
+        }
+    }
+});
+
+engravingSave.onclick = () => {
+    const engravingMap = new Map();
+    [...engravingLines].forEach((input, index) => {
+        input.readOnly = true;
+        engravingMap.set(`line${index + 1}`, input.value);
+    });
+    engravingSave.disabled = true;
+    engravingEdit.disabled = false;
+
+    setState({ name: 'engraving', value: Object.fromEntries(engravingMap) })
+}
+
+engravingEdit.onclick = () => {
+    [...document.querySelectorAll('.label-line')].forEach(labelLine =>
+        labelLine.classList.remove('visible')
+    );
+
+    [...engravingLines].forEach(input => input.readOnly = false);
+    engravingSave.disabled = false;
+    engravingEdit.disabled = true;
+}
+// ------- 
+
 const getVariantRetailers = (variant) => {
 
     const retailerTypes = ["on_demand", "engraved", "shipped"];
@@ -205,6 +272,9 @@ const renderPDP = (product) => {
                     }
                 });
 
+                // Clear all engraving lines
+                clearEngravingLines();
+
                 // Show corresponding quantity selector
                 [...document.querySelectorAll('.qty-selector')].forEach(qtySelector => {
                     const variantId = qtySelector.getAttribute('variant-id');
@@ -323,71 +393,7 @@ const loadLiquid = async () => {
     hideLoader();
 })();
 
-// Engraving
-const engravingBody = document.querySelector('.engraving-body');
-const engravingLines = document.querySelector('#engraving').querySelectorAll('input[type="text"]');
-const engravingSave = document.querySelector('#engraving-save');
-const engravingEdit = document.querySelector('#engraving-edit');
-const engravingCancel = document.querySelector('#engraving-cancel');
 
-document.querySelector('#engraving-checkbox').onchange = (e) => {
-    if (e.target.checked) {
-        engravingBody.classList.add('open')
-    } else {
-        engravingBody.classList.remove('open');
-        setState({ name: 'engraving', value: { line1: '', line2: '', line3: '', line4: '' } });
-        [...engravingLines].forEach(input => {
-            input.value = '';
-            input.readOnly = false;
-        });
-    }
-}
-
-engravingCancel.onclick = () => {
-    engravingBody.classList.remove('open');
-    document.querySelector('#engraving-checkbox').checked = false;
-    setState({ name: 'engraving', value: { line1: '', line2: '', line3: '', line4: '' } });
-    [...engravingLines].forEach(input => {
-        input.value = '';
-        input.readOnly = false;
-    });
-}
-
-[...engravingLines].forEach(engravingLine => {
-    engravingLine.oninput = () => {
-        const engravingText = [...engravingLines].map(e => e.value.trim()).join(' ');
-
-        if (!engravingSave.classList.value.includes('active') && engravingText) {
-            engravingSave.disabled = false;
-        }
-
-        if (engravingText.trim().length == 0) {
-            engravingSave.disabled = true;
-        }
-    }
-});
-
-engravingSave.onclick = () => {
-    const engravingMap = new Map();
-    [...engravingLines].forEach((input, index) => {
-        input.readOnly = true;
-        engravingMap.set(`line${index + 1}`, input.value);
-    });
-    engravingSave.disabled = true;
-    engravingEdit.disabled = false;
-
-    setState({ name: 'engraving', value: Object.fromEntries(engravingMap) })
-}
-
-engravingEdit.onclick = () => {
-    [...document.querySelectorAll('.label-line')].forEach(labelLine =>
-        labelLine.classList.remove('visible')
-    );
-
-    [...engravingLines].forEach(input => input.readOnly = false);
-    engravingSave.disabled = false;
-    engravingEdit.disabled = true;
-}
 
 // PRODUCT Event Listener
 window.addEventListener('products', function (e) {

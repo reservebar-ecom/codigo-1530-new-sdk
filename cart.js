@@ -48,7 +48,7 @@ const updateCartItemQty = async ({identifier, quantity}) => {
     await updateCartItem({ 
         identifier: identifier,
         variantId: cartItem.product.id, 
-        quantity: quantity, 
+        quantity: parseInt(quantity), 
         ...( cartItem?.itemOptions && {options: cartItem.itemOptions})
     });
 }
@@ -66,20 +66,36 @@ const cartItemHTML = (cartItem) => {
             `<p class="cart-item-expectation">${cartItem.deliveryExpectation}</p>` : ''
         }
         ${
+            cartItem.itemOptions?.recipients?.length ?
+            `
+                ${cartItem.itemOptions.recipients.map(recipient =>
+                    `<span class="gift-card-recipient">${recipient}</span>`    
+                ).join('')}
+            ` 
+            : ''
+        }
+        ${
             cartItem?.product?.volume ?
            `<p class="cart-item-volume">${cartItem.product.volume.toUpperCase()} ${cartItem.product.containerType}</p>` :
             ''
         }
                 <div class="cart-qty-wrapper"> 
-                    <select onchange="updateCartItemQty({identifier: ${cartItem.identifier}, quantity: this.value})" name="qty" id="qty-${cartItem.identifier}">
+
+                ${
+                    cartItem.itemOptions?.recipients?.length ? 
+                    '<div></div>' :
+                    `<select onchange="updateCartItemQty({identifier: ${cartItem.identifier}, quantity: this.value})" name="qty" id="qty-${cartItem.identifier}">
                         ${[...Array(cartItem.product.inStock).keys()].map(index =>
-            `<option value="${index + 1}" ${cartItem.quantity == index + 1 ? 'selected="selected"' : ''}>${index + 1}</option>`
-        ).join('')
-        }
-                    </select>
+                                `<option value="${index + 1}" ${cartItem.quantity == index + 1 ? 'selected="selected"' : ''}>${index + 1}</option>`
+                            ).join('')
+                        }
+                    </select>`
+                }
                     $${cartItem.product.price}
                 </div>
             </div>
+
+    
 
             ${cartItem.itemOptions?.line1 ?
             `<div class="cart-item-engraving"> 
