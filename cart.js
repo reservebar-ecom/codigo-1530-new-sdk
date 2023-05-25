@@ -11,7 +11,7 @@ const updateCartCountItems = (cart) => {
     }
 }
 
-const updateCartItem = async ({ variantId, quantity, engravingOptions }) => {
+const updateCartItem = async ({ variantId, quantity, engravingOptions, bundleId }) => {
 
     const cart = getState('cart');
     const updatedCart = await liquid.cart({
@@ -20,7 +20,8 @@ const updateCartItem = async ({ variantId, quantity, engravingOptions }) => {
             {
                 variantId: `${variantId}`,
                 quantity: quantity,
-                ...(engravingOptions && { options: engravingOptions })
+                ...(engravingOptions && { options: engravingOptions }),
+                ...(bundleId && { bundleExternalId: bundleId })
             }
         ],
     });
@@ -60,7 +61,7 @@ const cartItemHTML = (cartItem) => {
                 </div>
             </div>
 
-            ${cartItem.itemOptions ?
+            ${cartItem.itemOptions?.line1 ?
             `<div class="cart-item-engraving"> 
                     <h5>Engraved Lines</h5>
                     <ul>     

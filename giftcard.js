@@ -112,15 +112,13 @@ const validateEmail = (email) => {
       .toLowerCase()
       .match(
         /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-      );
+      ) != null;
   };
 
 const validateGiftCardInputs = () => {
-    const isRecipientValid = validateEmail(document.querySelector('#giftcard-recipients'));
-    const isSenderValid = document.querySelector('#giftcard-sender').length;
-    const isGiftCardValid = isRecipientValid && isSenderValid;
-
-    console.log(isGiftCardValid);
+    const isRecipientEmailValid = validateEmail(document.querySelector('#giftcard-recipients').value);
+    const isSenderNameValid = document.querySelector('#giftcard-sender').value.length > 0;
+    const isGiftCardValid = isRecipientEmailValid && isSenderNameValid;
 
     if(isGiftCardValid){
         document.querySelector('#giftcard-atc').disabled = false;
@@ -134,7 +132,9 @@ const renderGiftCard = (product) => {
 
     // Gift Card Values
     const giftcardValues = document.querySelector('#giftcard-values');
-    product.variants.reverse().forEach((variant, i) => {
+
+    console.log(product);
+    product?.variants?.reverse().forEach((variant, i) => {
         giftcardValues.innerHTML += `
         <option value="${variant.id}">$${variant.price}0</option>
     `;
@@ -142,24 +142,27 @@ const renderGiftCard = (product) => {
 
     // Gift Card Image
     const giftcardImg = document.querySelector('#giftcard-img');
-    giftcardImg.src = product.images[0];
+    giftcardImg.src = product?.images[0] || '';
 
     // Pre-set date as today
     document.getElementById('giftcard-sendDate').valueAsDate = new Date();
 
     // Validate Gift Card Inputs
-    document.querySelector('#giftcard-recipients').addEventListener('change', function(){
+    document.querySelector('#giftcard-recipients').addEventListener('input', function(){
         validateGiftCardInputs();
     });
 
-    document.querySelector('#giftcard-sender').addEventListener('change', function(){
+    document.querySelector('#giftcard-sender').addEventListener('input', function(){
         validateGiftCardInputs();
     });
 
 
     // Gift Card ATC
-    const addGiftcard = document.querySelector('#giftcard-atc');
-    addGiftcard.addEventListener('click', async function(){
+    const addGiftCard = document.querySelector('#giftcard-atc');
+    addGiftCard.addEventListener('click', async function(){
+
+        showLoader();
+
         const cart = getState('cart');
 
         const variantId = document.querySelector('#giftcard-values').value;
@@ -176,11 +179,11 @@ const renderGiftCard = (product) => {
             ...(cart && { id: cart.id }),
             cartItems: [
                 {
-                    variantId: `${variantId}`,
+                    variantId: variantId,
                     quantity: 1,
                     options: {
                         message: message,
-                        recipients: recipients,
+                        recipients: [recipients],
                         sender: sender,
                         sendDate: sendDate
                     }
@@ -189,6 +192,7 @@ const renderGiftCard = (product) => {
         });
     
         setState({ name: 'cart', value: updatedCart });
+        hideLoader();
     });
 }
  
@@ -199,5 +203,6 @@ window.addEventListener('products', function (e) {
 
     const groupingId = getState('grouping_id');
     const product = products?.find(product => product.id == groupingId);
+    
     renderGiftCard(product);
 });   
