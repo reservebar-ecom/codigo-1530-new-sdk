@@ -1,15 +1,3 @@
-const addToCart = async () => {
-    showLoader();
-    const retailerOption = document.querySelector('div.variant.enabled');
-    if (retailerOption) {
-        const variantId = retailerOption.querySelector('input:checked').value;
-        const quantity = document.querySelector(`select.qty-selector.enabled`).value;
-        const engravingOptions = document.querySelector('#engraving-checkbox').checked && getState('engraving');
-        await updateCartItem({ variantId, quantity, engravingOptions });
-    }
-    hideLoader();
-}
-
 // Carousel
 const prePopulateCarousel = () => {
     const carousel = document.querySelector('#pdp-carousel');

@@ -75,6 +75,7 @@ const renderPDP = (product) => {
             engraved: 'Get it Shipped'
         }
         const engravingElement = document.querySelector('#engraving');
+        const engravingInputs = engravingElement.querySelectorAll('input[type="text"]');
 
         document.querySelector('#variants').innerHTML = variants.map((variant, index) => {
             let variantRetailers = getVariantRetailers(variant);
@@ -85,6 +86,14 @@ const renderPDP = (product) => {
                 {
                     if (i == 0 && index == 0 && variant.type == 'engraved') {
                         engravingElement.classList.add('active');
+                        
+                        // Show only the correspoding number of engraving lines
+                        const numOfEngravingLines = product.variants[0].engravingConfigs.lines;
+                        [...engravingInputs].forEach((engravingInput, num) => {
+                            if(num>=numOfEngravingLines){
+                                engravingInput.style.display = 'none';
+                            }
+                        });
                     } 
                             
                     return `

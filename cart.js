@@ -18,7 +18,7 @@ const updateCartItem = async ({ variantId, quantity, engravingOptions, bundleId 
         ...(cart && { id: cart.id }),
         cartItems: [
             {
-                variantId: `${variantId}`,
+                variantId: variantId,
                 quantity: quantity,
                 ...(engravingOptions && { options: engravingOptions }),
                 ...(bundleId && { bundleExternalId: bundleId })
@@ -29,18 +29,26 @@ const updateCartItem = async ({ variantId, quantity, engravingOptions, bundleId 
     setState({ name: 'cart', value: updatedCart });
 }
 
-const deleteCartItem = async (variantId) => {
-    await updateCartItem({ variantId, quantity: 0 });
+const deleteCartItem = async (identifier) => {
+    const cart = getState('cart');
+    const cartItem = cart.cartItems.find(item => item.identifier == identifier );
+
+    await updateCartItem({ 
+        identifier: identifier,
+        variantId: cartItem.product.id, 
+        quantity: 0, 
+        ...( cartItem?.itemOptions && {options: cartItem.itemOptions})
+    });
 }
 
 const cartItemHTML = (cartItem) => {
-    
+
     return `
             <img src="${cartItem.product.imageUrl}">
             <div class="cart-item-info">
                 <div class="cart-item-top">
                     <h5>${cartItem.productGrouping.name}</h5>
-                    <button class="remove-item" onclick="deleteCartItem(${cartItem.product.id})">✕</button>
+                    <button class="remove-item" onclick="deleteCartItem(${cartItem.identifier})">✕</button>
                 </div>
                 ${cartItem.deliveryExpectation ?
             `<p class="cart-item-expectation">${cartItem.deliveryExpectation}</p>` : ''
