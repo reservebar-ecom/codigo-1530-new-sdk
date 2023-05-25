@@ -80,14 +80,16 @@
  }
 
  .cart-item h5 {
-    font-size: 1rem;
+    font-size: 0.75rem;
     letter-spacing: -1px;
+    margin-bottom: 0.5rem;
+    font-family: "Barlow Semi Condensed" !important;
  }
 
  .cart-item-top {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: start;
  }
 
  .cart-item-top button {
@@ -123,8 +125,8 @@
  }
 
  .cart-item-volume {
-   font-size: 12px;
-   opacity: .66;
+    font-size: 12px;
+    opacity: .66;
  }
 
  .cart-qty-wrapper {

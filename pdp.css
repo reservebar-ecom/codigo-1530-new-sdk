@@ -33,7 +33,8 @@ button {
    text-transform: uppercase;
    letter-spacing: -2px;
    text-align: center;
-   font-size: 2rem;
+   font-size: 1.75rem;
+   margin-bottom: 3rem;
 }
 
 .header-wrapper {
@@ -169,7 +170,7 @@ button {
 
 .retailer-name {
    text-transform: uppercase;
-   font-size: .8rem;
+   font-size: .7rem;
    font-family: Georgia,"Times New Roman",Times,serif;
 }
 
@@ -421,7 +422,7 @@ label[for="engraving-checkbox"] {
 .item.product-card {
    position: relative;
    width: 100%;
-   height: 400px;
+   height: 350px;
 
    background-position: center;
    background-repeat: no-repeat; 

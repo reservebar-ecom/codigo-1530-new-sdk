@@ -318,7 +318,7 @@ const prePopulateCarousel = () => {
 
     carousel.innerHTML = `${groups[group].ids.map(id => `
         <div liquid-id="${id}" class="item product-card"> 
-            ${id}
+        
         </div>
         `).join('')
         }`;
