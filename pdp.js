@@ -325,7 +325,7 @@ const prePopulateCarousel = () => {
 }
 
 
-const carouselCard = (product, id) => {
+const carouselCard = (product) => {
 
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
@@ -335,7 +335,8 @@ const carouselCard = (product, id) => {
     if (product) {
         const address = getState('address');
         const id = product.id;
-        const productCard = document.querySelector(`[liquid-id="${id}"].item`);
+        const productCards = document.querySelectorAll(`[liquid-id="${id}"].item`);
+
         const prices = product?.variants?.map(variant =>
             variant?.retailers?.map(retailer =>
                 parseFloat(retailer.price)
@@ -348,9 +349,9 @@ const carouselCard = (product, id) => {
                         <b>${product?.name}</b>
                         ${address ?
                 ` 
-                            ${product?.variants?.length === 0 ? '<p class="product-unavailable">Unavailable Product</p>' : ''}
-                            <h3 class="product-price">$ ${minimumPrice}</h3>
-                            `
+                        ${product?.variants?.length === 0 ? '<p class="product-unavailable">Unavailable Product</p>' : ''}
+                        <h3 class="product-price">$ ${minimumPrice}</h3>
+                `
                 :
                 `<p class="product-no-address">Insert Address to Check Availability</p>`
             }
@@ -360,8 +361,10 @@ const carouselCard = (product, id) => {
                  </div>
                 `;
 
-        productCard.style.backgroundImage = `url(${product?.images?.length ? product?.images[0].slice(6,) : ''})`;
-        productCard.innerHTML = productHTML;
+        productCards.forEach(productCard => {
+            productCard.style.backgroundImage = `url(${product?.images?.length ? product?.images[0].slice(6,) : ''})`;
+            productCard.innerHTML = productHTML;
+        });
     }
 }
 
@@ -398,7 +401,8 @@ const loadLiquid = async () => {
 // PRODUCT Event Listener
 window.addEventListener('products', function (e) {
     const products = getState('products');
-    products.forEach(product => carouselCard(product, product.id));
+    console.log(products);
+    products.forEach(product => carouselCard(product));
 
     const groupingId = getState('grouping_id');
     const product = products.find(product => product.id == groupingId);
