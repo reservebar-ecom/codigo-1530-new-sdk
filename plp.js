@@ -14,6 +14,7 @@ const prePopulateCards = () => {
             <a liquid-id="${id}" 
             href="${id.includes('GIFTCARD') ? gcURL : baseURL }?groupingId=${id}&group=${group}" 
             class="product-card">
+            <span class="loader-skeleton"></span>
            </a>
             `).join('')
             }`;
@@ -83,5 +84,5 @@ window.addEventListener('products', async function (e) {
     groupingIds.forEach((groupingId, index) => {
         const product = products.find(p => p.id == groupingId);
         createProductCard(product, groupingId);
-    })
+    });
 });

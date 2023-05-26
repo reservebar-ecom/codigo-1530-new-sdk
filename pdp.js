@@ -407,4 +407,5 @@ window.addEventListener('products', function (e) {
     const groupingId = getState('grouping_id');
     const product = products.find(product => product.id == groupingId);
     renderPDP(product);
+    hideLoader();
 });   

@@ -304,7 +304,7 @@ button {
 }
 
 #loader.active {
-   z-index: 9999;
+   z-index: 9997;
    opacity: 1;
    backdrop-filter: brightness(60%) blur(2px);
 }
