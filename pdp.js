@@ -401,11 +401,32 @@ const loadLiquid = async () => {
 // PRODUCT Event Listener
 window.addEventListener('products', function (e) {
     const products = getState('products');
-    console.log(products);
+    carouselNumItems = products.length;
     products.forEach(product => carouselCard(product));
 
     const groupingId = getState('grouping_id');
     const product = products.find(product => product.id == groupingId);
     renderPDP(product);
-    hideLoader();
+
+    $('.owl-carousel').owlCarousel({
+        loop: true,
+        margin: 10,
+        responsive: {
+            0: {
+                items: 1
+            },
+            576: {
+                items: 1 
+            },
+            768: {
+                items: Math.min(carouselNumItems, 3)
+            },
+            992: {
+                items: Math.min(carouselNumItems, 4)
+            },
+            1200: {
+                items: Math.min(carouselNumItems, 5)
+            }
+        }
+    })
 });   

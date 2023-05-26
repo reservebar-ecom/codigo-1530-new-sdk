@@ -1,3 +1,5 @@
+let carouselNumItems = 2;
+
 const showLoader = () => {
     const loader = document.querySelector('#loader');
     loader.classList.add('active');
