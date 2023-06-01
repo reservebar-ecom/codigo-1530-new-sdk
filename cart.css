@@ -81,7 +81,7 @@
 
  .cart-item h5 {
     font-size: 0.75rem;
-    letter-spacing: -1px;
+    letter-spacing: -.01rem;
     margin-bottom: 0.5rem;
     font-family: "Barlow Semi Condensed" !important;
  }
