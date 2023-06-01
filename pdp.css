@@ -37,6 +37,16 @@ button {
    margin-bottom: 3rem;
 }
 
+#product-unavailability-alert {
+   text-align: center;
+   color: brown;
+   display: none;
+}
+
+#product-unavailability-alert.visible {
+   display: block;
+}
+
 .header-wrapper {
    display: flex;
    justify-content: space-between;

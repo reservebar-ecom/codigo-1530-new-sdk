@@ -197,6 +197,9 @@ const renderPDP = (product) => {
         document.querySelector('#product-img').src = `${productVariant?.images?.find(e=>!!e) || product?.images?.find(e=>!!e)}`;
         document.querySelector('#product-img-mobile').src = `${productVariant?.images?.find(e=>!!e) || product.images?.find(e=>!!e)}`;
 
+        const unavailabilityAlert = document.querySelector('#product-unavailability-alert');
+        unavailabilityAlert.classList.remove('visible');
+
         const sizeSelector = document.querySelector('#size-selector');
         sizeSelector.classList.remove('visible');
 
@@ -205,6 +208,8 @@ const renderPDP = (product) => {
             sizeSelector.innerHTML = product.variants.map(variant =>
                 `<option value="${variant.productId}">${variant.size}</option>`
             ).join('');
+        }else{
+            unavailabilityAlert.classList.add('visible');
         }
 
         document.querySelector('#qty-selector-container').innerHTML =
