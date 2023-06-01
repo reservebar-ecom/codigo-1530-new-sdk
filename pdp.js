@@ -209,7 +209,9 @@ const renderPDP = (product) => {
                 `<option value="${variant.productId}">${variant.size}</option>`
             ).join('');
         }else{
-            unavailabilityAlert.classList.add('visible');
+            if(getState('address')){
+                unavailabilityAlert.classList.add('visible');
+            }
         }
 
         document.querySelector('#qty-selector-container').innerHTML =
