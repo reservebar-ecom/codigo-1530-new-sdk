@@ -100,6 +100,7 @@ window.addEventListener('address', async function (e) {
             await setLiquid();
         }
         addressObj = await liquid.address({ placeId: address?.placeId });
+        setState({ name: 'cart', value: null });
     }
     const groupingIds = getState('grouping_ids');
 

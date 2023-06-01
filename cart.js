@@ -199,7 +199,8 @@ window.addEventListener('cart', function (e) {
     const cart = getState('cart');
     updateCartDependencies(cart);
     const isOpen = isCartOpen();
-    if (!isOpen) {
+
+    if (!isOpen && cart) {
         openCart()
     }
 });
