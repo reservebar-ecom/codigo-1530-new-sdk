@@ -142,6 +142,8 @@ const renderPDP = (product) => {
             engraved: 'Get it Shipped'
         }
         const engravingElement = document.querySelector('#engraving');
+        engravingElement.classList.remove('active');
+
         const engravingInputs = engravingElement.querySelectorAll('input[type="text"]');
 
         document.querySelector('#variants').innerHTML = variants.map((variant, index) => {
@@ -196,6 +198,8 @@ const renderPDP = (product) => {
         document.querySelector('#product-img-mobile').src = `${productVariant?.images?.find(e=>!!e) || product.images?.find(e=>!!e)}`;
 
         const sizeSelector = document.querySelector('#size-selector');
+        sizeSelector.classList.remove('visible');
+
         if (product.variants.length) {
             sizeSelector.classList.add('visible');
             sizeSelector.innerHTML = product.variants.map(variant =>
@@ -228,6 +232,8 @@ const renderPDP = (product) => {
 
         // Add to Cart
         const atcButton = document.querySelector('#atc');
+        atcButton.classList.remove('visible');
+
         atcButton.onclick = async () => {
             await addToCart();
         };
