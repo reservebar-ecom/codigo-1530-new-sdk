@@ -182,6 +182,7 @@ const renderPDP = (product) => {
                             <p class="retailer-delivery-expectation">
                                 <small>${variant.shippingMethod.desc.expected}</small>
                             </p>
+                            ${variant.type == 'engraved' ? '<span class="engraving-badge-mobile">engraving</span>' : ''}
                         </div>
                     </div>
             `}

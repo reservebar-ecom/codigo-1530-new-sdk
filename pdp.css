@@ -352,13 +352,18 @@ label[for="engraving-checkbox"] {
    font-size: .8rem;
 }
 
-.engraving-badge {
+.engraving-badge,
+.engraving-badge-mobile {
    text-transform: uppercase;
    background: slategray;
    border: 1px solid transparent;
    padding: 0 0.5rem;
    font-size: 12px !important;
    color: white;
+}
+
+.engraving-badge-mobile {
+   display: none;
 }
 
 .engraving-header {
@@ -512,5 +517,15 @@ label[for="engraving-checkbox"] {
    .qty-selector {
       margin-right: 0 !important;
       margin-bottom: 1rem;
+   }
+}
+
+@media only screen and (max-width: 768px) {
+   .engraving-badge {
+      display: none;
+   }
+
+   .engraving-badge-mobile {
+      display: block;
    }
 }

@@ -187,11 +187,6 @@ const checkout = async () => {
     });
 
     window.location.href = checkoutObj.url;
-    
-    // window.open(
-    //     checkoutObj.url,
-    //     '_blank'
-    // );
 
     hideLoader();
 }
