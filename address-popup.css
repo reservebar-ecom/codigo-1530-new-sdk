@@ -91,19 +91,6 @@
    max-width: 100%;
 }
 
-@media only screen and (max-width: 768px) {
-   .address-option {
-      font-size: .75rem;
-      text-align: start;
-      justify-content: start;
-   }
-
-   #address-input {
-      font-size: .75rem;
-      padding: 0.5rem 0.25rem;
-   }
- }
-
 .address-option:hover {
    background-color: #e9e9e9;
 }
@@ -156,3 +143,24 @@
       width: 100%;
    }
 }
+
+@media only screen and (max-width: 768px) {
+   .address-option {
+      font-size: .75rem;
+      text-align: start;
+      justify-content: start;
+   }
+
+   #address-input {
+      font-size: .75rem;
+      padding: 0.5rem 0.25rem;
+   }
+
+   #popup h4 {
+      text-align: center;
+   }
+   
+   #popup-modal {
+      padding-top: 0;
+   }
+ }
