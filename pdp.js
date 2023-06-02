@@ -363,7 +363,6 @@ const carouselCard = (product) => {
                         ${address ?
                 ` 
                         ${product?.variants?.length === 0 ? '<p class="product-unavailable">Unavailable Product</p>' : ''}
-                        <h3 class="product-price">$ ${minimumPrice}</h3>
                 `
                 :
                 `<p class="product-no-address">Insert Address to Check Availability</p>`
