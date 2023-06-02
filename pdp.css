@@ -345,10 +345,11 @@ button {
 }
 
 label[for="engraving-checkbox"] {
-   margin-bottom: .25rem;
+   margin-bottom: .125rem;
    margin-left: .5rem;
    font-family: Georgia,"Times New Roman",Times,serif !important;
    text-transform: uppercase;
+   font-size: .8rem;
 }
 
 .engraving-badge {

@@ -67,7 +67,7 @@ engravingEdit.onclick = () => {
 
 const getVariantRetailers = (variant) => {
 
-    const retailerTypes = ["on_demand", "engraved", "shipped"];
+    const retailerTypes = ["onDemand", "engraved", "shipped"];
     const variantRetailers = retailerTypes.map(type => {
         return variant?.retailers?.filter(e => e.type == type).sort((a, b) => parseFloat(a.price) - parseFloat(b.price))[0];
     }).filter(e => e);
@@ -137,7 +137,7 @@ const renderPDP = (product) => {
     if (product) {
         const variants = product.variants;
         const typeMap = {
-            on_demand: 'Get it Now',
+            onDemand: 'Get it Now',
             shipped: 'Get it Shipped',
             engraved: 'Get it Shipped'
         }
