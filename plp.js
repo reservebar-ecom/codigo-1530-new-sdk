@@ -37,7 +37,7 @@ const createProductCard = (product, id) => {
             )
         )[0];
 
-        const minimumPrice = prices ? `<h3 class="product-price">$ ${Math.min(...prices)}</h3>` : '';
+        const minimumPrice = prices ? `<h3 class="product-price">${formatter.format(Math.min(...prices))}</h3>` : '';
         const giftCardValues = isGiftCard ? product.variants.map(v => `<span class="gift-card-value">${formatter.format(v.price)}</span>`).join('') : '';
 
         const hasEngraving = [...new Set(product.variants.map(variant => variant.availability).flat())].some(e => e == 'engraved');
