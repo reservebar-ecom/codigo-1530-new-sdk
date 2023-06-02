@@ -45,6 +45,11 @@
     margin-bottom: 0;
 }
 
+.gift-card-recipient {
+    font-family: Georgia,"Times New Roman",Times,serif;
+    font-size: .75rem;
+}
+
 @media only screen and (max-width: 768px) {
     .giftcard-title {
         font-size: 3rem;

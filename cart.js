@@ -68,15 +68,7 @@ const cartItemHTML = (cartItem) => {
                     cartItem.deliveryExpectation ?
                     `<p class="cart-item-expectation">${cartItem.deliveryExpectation}</p>` : ''
                 }
-        ${
-            cartItem.itemOptions?.recipients?.length ?
-            `
-                ${cartItem.itemOptions.recipients.map(recipient =>
-                    `<span class="gift-card-recipient">${recipient}</span>`    
-                ).join('')}
-            ` 
-            : ''
-        }
+        
         ${
             cartItem?.product?.volume ?
            `<p class="cart-item-volume">${cartItem.product.volume.toUpperCase()} ${cartItem.product.containerType}</p>` :
@@ -84,6 +76,16 @@ const cartItemHTML = (cartItem) => {
         }
                 <div class="cart-qty-wrapper"> 
 
+                ${
+                    cartItem.itemOptions?.recipients?.length ?
+                    `
+                        ${cartItem.itemOptions.recipients.map(recipient =>
+                            `<span class="gift-card-recipient">${recipient}</span>`    
+                        ).join('')}
+                    ` 
+                    : ''
+                }
+                
                 ${
                     cartItem.itemOptions?.recipients?.length ? 
                     '<div></div>' :
@@ -94,6 +96,7 @@ const cartItemHTML = (cartItem) => {
                         }
                     </select>`
                 }
+                
                     ${formatter.format(cartItem.product.price)}
                     
                 </div>
