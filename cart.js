@@ -186,10 +186,12 @@ const checkout = async () => {
         address: addressObj
     });
 
-    window.open(
-        checkoutObj.url,
-        '_blank'
-    );
+    window.location.href = checkoutObj.url;
+    
+    // window.open(
+    //     checkoutObj.url,
+    //     '_blank'
+    // );
 
     hideLoader();
 }
