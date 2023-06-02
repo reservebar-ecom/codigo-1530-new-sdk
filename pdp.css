@@ -526,6 +526,6 @@ label[for="engraving-checkbox"] {
    }
 
    .engraving-badge-mobile {
-      display: block;
+      display: inline-flex;
    }
 }
