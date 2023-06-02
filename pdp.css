@@ -453,6 +453,10 @@ label[for="engraving-checkbox"] {
    width: 110px;
 }
 
+.product-out-of-stock-alert {
+   display: none;
+}
+
 .product-backdrop {
    position: absolute;
    width: 100%;

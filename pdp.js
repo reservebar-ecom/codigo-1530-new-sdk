@@ -310,8 +310,15 @@ const addToCart = async () => {
     showLoader();
     const retailerOption = document.querySelector('div.variant.enabled');
     if (retailerOption) {
+        let cart = getState('cart');
+
         const variantId = retailerOption.querySelector('input:checked').value;
-        const quantity = document.querySelector(`select.qty-selector.enabled`).value;
+        const cartItem = cart?.cartItems?.find( e => e.product.id == variantId);
+        const previousQuantity = parseInt(cartItem?.quantity || 0); 
+        const maxQuantity = parseInt(cartItem?.product?.inStock || 1000);
+        const addedQuantity = parseInt(document.querySelector(`select.qty-selector.enabled`).value);
+        
+        const quantity = Math.min( addedQuantity + previousQuantity, maxQuantity);
         const options = document.querySelector('#engraving-checkbox').checked && getState('engraving');
         await updateCartItem({ variantId, quantity, options });
     }
