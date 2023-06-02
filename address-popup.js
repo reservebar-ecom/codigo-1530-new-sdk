@@ -74,6 +74,7 @@ addressInput.oninput = async (e) => {
 
 addressOptions.forEach(addressOption => {
     addressOption.onclick = async () => {
+
         const addressDescription = addressOption.innerText;
         const addressPlaceId = addressOption.id;
         setState({
@@ -83,6 +84,8 @@ addressOptions.forEach(addressOption => {
                 placeId: addressPlaceId
             }
         });
+
+        setState({ name: 'cart', value: null });
     }
 });
 
@@ -100,7 +103,6 @@ window.addEventListener('address', async function (e) {
             await setLiquid();
         }
         addressObj = await liquid.address({ placeId: address?.placeId });
-        setState({ name: 'cart', value: null });
     }
     const groupingIds = getState('grouping_ids');
 
