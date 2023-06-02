@@ -26,6 +26,7 @@
     height: 100vh;
     z-index: 9999;
     width: 450px;
+    max-width: 100%;
  }
 
  #cart-container.closed {
