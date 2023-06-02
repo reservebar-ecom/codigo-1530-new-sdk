@@ -347,6 +347,8 @@ button {
 label[for="engraving-checkbox"] {
    margin-bottom: .25rem;
    margin-left: .5rem;
+   font-family: Georgia,"Times New Roman",Times,serif !important;
+   text-transform: uppercase;
 }
 
 .engraving-badge {
@@ -361,10 +363,6 @@ label[for="engraving-checkbox"] {
 .engraving-header {
    display: flex;
    align-items: center;
-}
-
-.engraving-header label {
-   font-family: Georgia,"Times New Roman",Times,serif !important;
 }
 
 .engraving-body {
