@@ -38,7 +38,7 @@ const createProductCard = (product, id) => {
         )[0];
 
         const minimumPrice = prices ? `<h3 class="product-price">$ ${Math.min(...prices)}</h3>` : '';
-        const giftCardValues = isGiftCard ? product.variants.map(v => `<span class="gift-card-value">$${v.price}</span>`).join('') : '';
+        const giftCardValues = isGiftCard ? product.variants.map(v => `<span class="gift-card-value">${formatter.format(v.price)}</span>`).join('') : '';
 
         const hasEngraving = [...new Set(product.variants.map(variant => variant.availability).flat())].some(e => e == 'engraved');
         const imgSrc = product?.images?.length ? product?.images[0].slice(6,) : product.variants.find(variant => variant.images.length)?.images[0] || '';

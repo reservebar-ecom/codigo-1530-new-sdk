@@ -145,7 +145,7 @@ const renderPDP = (product) => {
         engravingElement.classList.remove('active');
 
         const engravingInputs = engravingElement.querySelectorAll('input[type="text"]');
-
+          
         document.querySelector('#variants').innerHTML = variants.map((variant, index) => {
             let variantRetailers = getVariantRetailers(variant);
             
@@ -173,7 +173,7 @@ const renderPDP = (product) => {
                             <h5>${typeMap[variant.type]}</h5>
                             ${variant.type == 'engraved' ? '<span class="engraving-badge">engraving</span>' : ''}
                             </div>
-                            <span>$${variant.price}</span>
+                            <span>${formatter.format(variant.price)}</span>
                         </div>
                             <input class="variant-id" name="variant-${index}" type="radio" value="${variant.variantId}" id="${variant.variantId}" engraving="${variant.type == 'engraved'}" ${i == 0 ? 'checked' : ''}/>
                             <label class="retailer-name" for="${variant.variantId}">

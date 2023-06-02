@@ -91,7 +91,8 @@ const cartItemHTML = (cartItem) => {
                         }
                     </select>`
                 }
-                    $${cartItem.product.price}
+                    ${formatter.format(cartItem.product.price)}
+                    
                 </div>
             </div>
 

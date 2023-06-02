@@ -29,6 +29,11 @@ const getState = (name) => {
     return JSON.parse(strValue)
 }
 
+const formatter = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+});
+
 const groups = {
     mezcal: {
         name: "Mezcal",

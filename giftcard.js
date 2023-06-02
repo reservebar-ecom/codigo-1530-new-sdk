@@ -90,7 +90,7 @@ const loadLiquid = async () => {
 const createGiftCardValue = (variant, index) => {
     const el = document.createElement('option');
     el.innerHTML = `
-        <option value="${variant.id}">$${variant.price}0</option>
+        <option value="${variant.id}">${formatter.format(variant.price)}</option>
     `;
 
     return el;
@@ -125,7 +125,7 @@ const renderGiftCard = (product) => {
 
     product?.variants?.forEach((variant, i) => {
         giftcardValues.innerHTML += `
-        <option value="${variant.id}">$${variant.price}0</option>
+        <option value="${variant.id}">${formatter.format(variant.price)}</option>
     `;
     });
 
