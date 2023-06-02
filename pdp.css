@@ -363,6 +363,10 @@ label[for="engraving-checkbox"] {
    align-items: center;
 }
 
+.engraving-header label {
+   font-family: Georgia,"Times New Roman",Times,serif !important;
+}
+
 .engraving-body {
    display: flex;
    height: 0px;
