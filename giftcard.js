@@ -121,9 +121,9 @@ const renderGiftCard = (product) => {
 
     // Gift Card Values
     const giftcardValues = document.querySelector('#giftcard-values');
+    giftcardValues.innerHTML = '';
 
-    console.log(product);
-    product?.variants?.reverse().forEach((variant, i) => {
+    product?.variants?.forEach((variant, i) => {
         giftcardValues.innerHTML += `
         <option value="${variant.id}">$${variant.price}0</option>
     `;
