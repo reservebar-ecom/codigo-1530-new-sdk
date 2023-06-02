@@ -34,6 +34,12 @@ const formatter = new Intl.NumberFormat('en-US', {
     currency: 'USD',
 });
 
+const dateFormatter = (dateStr) => {
+    const date = new Date(Date.UTC( ...dateStr.split('-'), 7));
+    const formatedDate = new Intl.DateTimeFormat('en-US').format(date);
+    return formatedDate
+}
+
 const groups = {
     mezcal: {
         name: "Mezcal",

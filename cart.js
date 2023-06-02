@@ -62,9 +62,12 @@ const cartItemHTML = (cartItem) => {
                     <h5>${cartItem.productGrouping.name}</h5>
                     <button class="remove-item" onclick="deleteCartItem(${cartItem.identifier})">✕</button>
                 </div>
-                ${cartItem.deliveryExpectation ?
-            `<p class="cart-item-expectation">${cartItem.deliveryExpectation}</p>` : ''
-        }
+                ${
+                    cartItem.itemOptions?.sendDate ?
+                    `<p class="cart-item-expectation">To be sent on ${dateFormatter(cartItem.itemOptions?.sendDate)}</p>` :
+                    cartItem.deliveryExpectation ?
+                    `<p class="cart-item-expectation">${cartItem.deliveryExpectation}</p>` : ''
+                }
         ${
             cartItem.itemOptions?.recipients?.length ?
             `
