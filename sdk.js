@@ -35,9 +35,8 @@ const formatter = new Intl.NumberFormat('en-US', {
 });
 
 const dateFormatter = (dateStr) => {
-    const date = new Date(Date.UTC( ...dateStr.split('-'), 7));
-    const formatedDate = new Intl.DateTimeFormat('en-US').format(date);
-    return formatedDate
+    const dateArray = dateStr.split('-');
+    return `${dateArray[1]}/${dateArray[2]}/${dateArray[0]}`
 }
 
 const groups = {
