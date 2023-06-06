@@ -1,6 +1,6 @@
 const prePopulateCards = () => {
     const plpEl = document.querySelector('#plp');
-    Object.keys(groups).forEach(group => {
+    Object.keys(groups).filter(gr => gr != 'all').forEach(group => {
         const groupHeader = document.createElement('h2');
         groupHeader.innerText = groups[group].name;
         groupHeader.classList.add('collection-card-heading');
@@ -12,7 +12,7 @@ const prePopulateCards = () => {
 
         productGrouping.innerHTML = `${groups[group].ids.map(id => `
             <a liquid-id="${id}" 
-            href="${id.includes('GIFTCARD') ? gcURL : baseURL }?groupingId=${id}&group=${group}" 
+            href="${id.includes('GIFTCARD') ? gcURL : baseURL }?groupingId=${id}&group=${group == 'gifts' ? 'all' : group}" 
             class="product-card">
             <span class="loader-skeleton"></span>
            </a>

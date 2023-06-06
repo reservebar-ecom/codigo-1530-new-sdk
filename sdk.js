@@ -83,7 +83,31 @@ const groups = {
             "BUNDLE-200000071",
             "GROUPING-GIFTCARD-1973621"
         ]
-    }
+    },
+    all: {
+        name: "All",
+        ids: [
+            "GROUPING-1726128",
+            "GROUPING-1771516",
+            "GROUPING-424817",
+            "GROUPING-741422",
+            "GROUPING-328527",
+            "GROUPING-328528",
+            "GROUPING-1345195",
+            "GROUPING-1947546",
+            "GROUPING-1978934",
+            "GROUPING-1981432",
+            "GROUPING-2055467",
+            "GROUPING-1778478",
+            "GROUPING-1293186",
+            "GROUPING-1569334",
+            "GROUPING-1781649",
+            "GROUPING-1771605",
+            "GROUPING-1723282",
+            "BUNDLE-200000071",
+            "GROUPING-GIFTCARD-1973621"
+        ]
+    },
 }
 
 const engravingIcon = `<div class="engraving-icon-wrapper"><div title="Engraving Available" class="engraving-icon"><small>ENGRAVING </small><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-ticket-detailed" viewBox="0 0 16 16">
