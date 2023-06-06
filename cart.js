@@ -1,14 +1,12 @@
 const updateCartCountItems = (cart) => {
-    if (cart) {
-        const totalNumberElements = document.querySelectorAll('.cart-num-items');
-        totalNumberElements.forEach(el => {
-            if (cart?.itemCount) {
-                el.innerHTML = cart?.itemCount;
-            } else {
-                el.innerHTML = ''
-            }
-        })
-    }
+    const totalNumberElements = document.querySelectorAll('.cart-num-items');
+    totalNumberElements.forEach(el => {
+        if (cart?.itemCount) {
+            el.innerHTML = cart?.itemCount;
+        } else {
+            el.innerHTML = 0;
+        }
+    })
 }
 
 const updateCartItem = async ({ variantId, quantity, options, bundleId }) => {
