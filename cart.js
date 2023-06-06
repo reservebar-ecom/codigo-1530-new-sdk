@@ -192,8 +192,8 @@ const checkout = async () => {
     });
 
     window.location.href = checkoutObj.url;
-
     hideLoader();
+    return false;
 }
 
 // CART Event Listener
