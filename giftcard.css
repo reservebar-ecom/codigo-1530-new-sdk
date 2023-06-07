@@ -48,6 +48,9 @@
 .gift-card-recipient {
     font-family: Georgia,"Times New Roman",Times,serif;
     font-size: .75rem;
+    max-width: 200px;
+    overflow-wrap: break-word;
+    line-height: .95rem;
 }
 
 @media only screen and (max-width: 768px) {
