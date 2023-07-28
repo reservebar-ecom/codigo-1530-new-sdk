@@ -30,6 +30,7 @@ engravingCancel.onclick = () => {
 
 [...engravingLines].forEach(engravingLine => {
     engravingLine.oninput = () => {
+        engravingLine.value  = engravingLine.value.toUpperCase();
         const engravingText = [...engravingLines].map(e => e.value.trim()).join(' ');
 
         if (!engravingSave.classList.value.includes('active') && engravingText) {
