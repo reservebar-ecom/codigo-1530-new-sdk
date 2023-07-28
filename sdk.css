@@ -2,6 +2,16 @@
     left: 60px !important;
 }
 
+.grecaptcha-badge { 
+  visibility: hidden;
+}
+
+.recaptcha-div {
+  position: absolute;
+  bottom: 10px;
+  left: calc( 50% - 100px );
+}
+
 .loader-skeleton {
     width: 360px;
     height: 550px;
