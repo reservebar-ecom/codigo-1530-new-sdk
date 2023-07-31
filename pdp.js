@@ -214,8 +214,10 @@ const renderPDP = (product) => {
         const sizeSelector = document.querySelector('#size-selector');
         sizeSelector.classList.remove('visible');
 
-        if (product.variants.length && !groupingId.includes('BUNDLE')) {
-            sizeSelector.classList.add('visible');
+        if (product.variants.length) {
+            if(!groupingId.includes('BUNDLE')){
+                sizeSelector.classList.add('visible');
+            }
             sizeSelector.innerHTML = product.variants.map(variant =>
                 `<option value="${variant.productId}">${variant.size}</option>`
             ).join('');
