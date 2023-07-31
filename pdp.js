@@ -139,6 +139,11 @@ const handleSizeSelector = (selectedSize) => {
 
 const renderPDP = (product) => {
 
+    // Grouping IDs
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const groupingId = urlParams.get('groupingId');
+    
     if (product) {
         const variants = product.variants;
         const typeMap = {
@@ -209,7 +214,7 @@ const renderPDP = (product) => {
         const sizeSelector = document.querySelector('#size-selector');
         sizeSelector.classList.remove('visible');
 
-        if (product.variants.length) {
+        if (product.variants.length && !groupingId.includes('BUNDLE')) {
             sizeSelector.classList.add('visible');
             sizeSelector.innerHTML = product.variants.map(variant =>
                 `<option value="${variant.productId}">${variant.size}</option>`
