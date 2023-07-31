@@ -82,12 +82,13 @@ const quantitySelectorHTML = ({ product, variantId, isActive }) => {
     const variants = product.variants.map(variant => variant.retailers).flat();
     const variant = variants.find(variant => variant.variantId == variantId);
     const inStockQuantity = variant.inStock;
-    const isBackOrder = variant.customerPlacement == "backOrder";
+    const customerPlacement = variant.customerPlacement;
+    const isBackOrder = customerPlacement == "backOrder";
     const backOrderQty = isBackOrder ? 12 : 0;
     const qty = Math.max(backOrderQty, inStockQuantity);
 
     return `
-    <select class="qty-selector uk-button ${isActive && 'enabled'}" variant-id="${variantId}">
+    <select class="qty-selector uk-button ${isActive && 'enabled'}" variant-id="${variantId}" customer-placement="${customerPlacement}">
         ${[...Array(qty).keys()].map(index =>
         `<option value="${index + 1}">${index + 1}</option>`
     ).join('')}
@@ -328,11 +329,13 @@ const addToCart = async () => {
         const cartItem = cart?.cartItems?.find(e => e.product.id == variantId);
         const previousQuantity = parseInt(cartItem?.quantity || 0);
         const maxQuantity = parseInt(cartItem?.product?.inStock || 1000);
-        const addedQuantity = parseInt(document.querySelector(`select.qty-selector.enabled`).value);
-
+        const qtySelector = document.querySelector(`select.qty-selector.enabled`);
+        const addedQuantity = parseInt(qtySelector.value);
+            
+        const customerPlacement = customerPlacementMap[qtySelector.getAttribute('customer-placement')];
         const quantity = Math.min(addedQuantity + previousQuantity, maxQuantity);
         const options = document.querySelector('#engraving-checkbox').checked && getState('engraving');
-        await updateCartItem({ variantId, quantity, options });
+        await updateCartItem({ variantId, quantity, options, customerPlacement });
     }
     hideLoader();
 }

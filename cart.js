@@ -9,7 +9,7 @@ const updateCartCountItems = (cart) => {
     })
 }
 
-const updateCartItem = async ({ variantId, quantity, options, bundleId }) => {
+const updateCartItem = async ({ variantId, quantity, options, bundleId, customerPlacement = 'standard' }) => {
 
     const cart = getState('cart');
     const updatedCart = await liquid.cart({
@@ -18,6 +18,7 @@ const updateCartItem = async ({ variantId, quantity, options, bundleId }) => {
             {
                 variantId: variantId,
                 quantity: quantity,
+                customerPlacement: customerPlacement,
                 ...(options && { options: options }),
                 ...(bundleId && { bundleExternalId: bundleId })
             }
@@ -42,23 +43,23 @@ const deleteCartItem = async (identifier) => {
 const updateCartItemQty = async ({identifier, quantity}) => {
     const cart = getState('cart');
     const cartItem = cart.cartItems.find(item => item.identifier == identifier );
+    const customerPlacement = cartItem.customerPlacement;
 
     await updateCartItem({ 
         identifier: identifier,
         variantId: cartItem.product.id, 
-        quantity: parseInt(quantity), 
+        quantity: parseInt(quantity),
+        customerPlacement: customerPlacement, 
         ...( cartItem?.itemOptions && {options: cartItem.itemOptions})
     });
 }
 
 const cartItemHTML = (cartItem) => {
 
-
     const inStockQty = cartItem.product.inStock;
-    const isBackOrder = cartItem.product.inStock == 0; // TODO change for backOrder when API does add this field
+    const isBackOrder = cartItem.customerPlacement == 'back_order';
     const backOrderQty = isBackOrder ? 12 : 0;
     const qty = Math.max(backOrderQty, inStockQty);
-
 
     return `
             <img src="${cartItem.product.imageUrl}">

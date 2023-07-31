@@ -39,6 +39,12 @@ const dateFormatter = (dateStr) => {
     return `${dateArray[1]}/${dateArray[2]}/${dateArray[0]}`
 }
 
+const customerPlacementMap = {
+    'standard':'standard',
+    'backOrder': 'back_order',
+    'preSale': 'pre_sale'
+};
+
 const groups = {
     mezcal: {
         name: "Mezcal",
