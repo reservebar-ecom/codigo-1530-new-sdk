@@ -53,6 +53,13 @@ const updateCartItemQty = async ({identifier, quantity}) => {
 
 const cartItemHTML = (cartItem) => {
 
+
+    const inStockQty = cartItem.product.inStock;
+    const isBackOrder = cartItem.product.inStock == 0; // TODO change for backOrder when API does add this field
+    const backOrderQty = isBackOrder ? 12 : 0;
+    const qty = Math.max(backOrderQty, inStockQty);
+
+
     return `
             <img src="${cartItem.product.imageUrl}">
             <div class="cart-item-info">
@@ -88,7 +95,7 @@ const cartItemHTML = (cartItem) => {
                     cartItem.itemOptions?.recipients?.length ? 
                     '<div></div>' :
                     `<select onchange="updateCartItemQty({identifier: ${cartItem.identifier}, quantity: this.value})" name="qty" id="qty-${cartItem.identifier}">
-                        ${[...Array(cartItem.product.inStock).keys()].map(index =>
+                        ${[...Array(qty).keys()].map(index =>
                                 `<option value="${index + 1}" ${cartItem.quantity == index + 1 ? 'selected="selected"' : ''}>${index + 1}</option>`
                             ).join('')
                         }
