@@ -82,10 +82,13 @@ const quantitySelectorHTML = ({ product, variantId, isActive }) => {
     const variants = product.variants.map(variant => variant.retailers).flat();
     const variant = variants.find(variant => variant.variantId == variantId);
     const inStockQuantity = variant.inStock;
+    const isBackOrder = variant.customerPlacement =="backOrder";
+    const backOrderQty = isBackOrder ? 12 : 0;
+    const qty = Math.max(backOrderQty, inStockQuantity);
 
     return `
     <select class="qty-selector uk-button ${isActive && 'enabled'}" variant-id="${variantId}">
-        ${[...Array(inStockQuantity).keys()].map(index =>
+        ${[...Array(qty).keys()].map(index =>
         `<option value="${index + 1}">${index + 1}</option>`
     ).join('')}
     </select>
