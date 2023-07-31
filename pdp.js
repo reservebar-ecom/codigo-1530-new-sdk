@@ -30,7 +30,7 @@ engravingCancel.onclick = () => {
 
 [...engravingLines].forEach(engravingLine => {
     engravingLine.oninput = () => {
-        engravingLine.value  = engravingLine.value.toUpperCase();
+        engravingLine.value = engravingLine.value.toUpperCase();
         const engravingText = [...engravingLines].map(e => e.value.trim()).join(' ');
 
         if (!engravingSave.classList.value.includes('active') && engravingText) {
@@ -82,7 +82,7 @@ const quantitySelectorHTML = ({ product, variantId, isActive }) => {
     const variants = product.variants.map(variant => variant.retailers).flat();
     const variant = variants.find(variant => variant.variantId == variantId);
     const inStockQuantity = variant.inStock;
-    const isBackOrder = variant.customerPlacement =="backOrder";
+    const isBackOrder = variant.customerPlacement == "backOrder";
     const backOrderQty = isBackOrder ? 12 : 0;
     const qty = Math.max(backOrderQty, inStockQuantity);
 
@@ -101,7 +101,8 @@ const handleSizeSelector = (selectedSize) => {
 
         // Change image to match the one corresponding the size
         const product = getState('product');
-        const productVariant = product.variants.find(e => e.size == selectedSize)
+        const productVariant = product.variants.find(e => e.size == selectedSize);
+
         if (productVariant.images[0]) {
             document.querySelector('#product-img').src = productVariant.images[0];
             document.querySelector('#product-img-mobile').src = productVariant.images[0];
@@ -149,27 +150,26 @@ const renderPDP = (product) => {
         engravingElement.classList.remove('active');
 
         const engravingInputs = engravingElement.querySelectorAll('input[type="text"]');
-          
+
         document.querySelector('#variants').innerHTML = variants.map((variant, index) => {
             let variantRetailers = getVariantRetailers(variant);
-            
+
             return `
                   <div class="variant ${index == 0 && 'enabled'}" size="${variant.size}">
-                    ${variantRetailers.map((variant, i) =>
-                {
-                    if (i == 0 && index == 0 && variant.type == 'engraved') {
-                        engravingElement.classList.add('active');
-                        
-                        // Show only the correspoding number of engraving lines
-                        const numOfEngravingLines = product.variants[0].engravingConfigs.lines;
-                        [...engravingInputs].forEach((engravingInput, num) => {
-                            if(num>=numOfEngravingLines){
-                                engravingInput.style.display = 'none';
-                            }
-                        });
-                    } 
-                            
-                    return `
+                    ${variantRetailers.map((variant, i) => {
+                if (i == 0 && index == 0 && variant.type == 'engraved') {
+                    engravingElement.classList.add('active');
+
+                    // Show only the correspoding number of engraving lines
+                    const numOfEngravingLines = product.variants[0].engravingConfigs.lines;
+                    [...engravingInputs].forEach((engravingInput, num) => {
+                        if (num >= numOfEngravingLines) {
+                            engravingInput.style.display = 'none';
+                        }
+                    });
+                }
+
+                return `
                     <div class="variant-option ${index == 0 && i == 0 ? 'selected' : ''}">
                         <div style="width:100%">
                         <div class="retailer-type-and-price">
@@ -199,8 +199,9 @@ const renderPDP = (product) => {
         document.querySelector('#product-description').innerHTML = product.descriptionHtml;
         document.querySelector('#product-name').innerText = product.name;
         const productVariant = product.variants[0];
-        document.querySelector('#product-img').src = `${productVariant?.images?.find(e=>!!e) || product?.images?.find(e=>!!e)}`;
-        document.querySelector('#product-img-mobile').src = `${productVariant?.images?.find(e=>!!e) || product.images?.find(e=>!!e)}`;
+
+        document.querySelector('#product-img').src = `${product?.images?.find(e => !!e) || productVariant?.images?.find(e => !!e)}`;
+        document.querySelector('#product-img-mobile').src = `${product.images?.find(e => !!e) || productVariant?.images?.find(e => !!e)}`;
 
         const unavailabilityAlert = document.querySelector('#product-unavailability-alert');
         unavailabilityAlert.classList.remove('visible');
@@ -213,8 +214,8 @@ const renderPDP = (product) => {
             sizeSelector.innerHTML = product.variants.map(variant =>
                 `<option value="${variant.productId}">${variant.size}</option>`
             ).join('');
-        }else{
-            if(getState('address')){
+        } else {
+            if (getState('address')) {
                 unavailabilityAlert.classList.add('visible');
             }
         }
@@ -255,9 +256,9 @@ const renderPDP = (product) => {
         }
 
         // Show or hide engraving for first variant
-        const productRetailer = productVariant?.retailers?.find(e=>!!e);
+        const productRetailer = productVariant?.retailers?.find(e => !!e);
         const hasEngraving = productRetailer?.type == 'engraved';
-   
+
         // On variant id block click
         const variantIdBlocks = [...document.querySelectorAll('.variant-option')];
         [...variantIdBlocks].forEach(variantIdBlock =>
@@ -317,12 +318,12 @@ const addToCart = async () => {
         let cart = getState('cart');
 
         const variantId = retailerOption.querySelector('input:checked').value;
-        const cartItem = cart?.cartItems?.find( e => e.product.id == variantId);
-        const previousQuantity = parseInt(cartItem?.quantity || 0); 
+        const cartItem = cart?.cartItems?.find(e => e.product.id == variantId);
+        const previousQuantity = parseInt(cartItem?.quantity || 0);
         const maxQuantity = parseInt(cartItem?.product?.inStock || 1000);
         const addedQuantity = parseInt(document.querySelector(`select.qty-selector.enabled`).value);
-        
-        const quantity = Math.min( addedQuantity + previousQuantity, maxQuantity);
+
+        const quantity = Math.min(addedQuantity + previousQuantity, maxQuantity);
         const options = document.querySelector('#engraving-checkbox').checked && getState('engraving');
         await updateCartItem({ variantId, quantity, options });
     }
@@ -440,7 +441,7 @@ window.addEventListener('products', function (e) {
                 items: 1
             },
             576: {
-                items: 1 
+                items: 1
             },
             768: {
                 items: Math.min(carouselNumItems, 3)
