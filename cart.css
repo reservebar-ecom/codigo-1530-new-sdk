@@ -10,6 +10,7 @@
     height: 100%;
     max-height: calc(100% - 15rem);
     overflow: scroll;
+    overflow-x: hidden;
  }
 
  #cart-container {

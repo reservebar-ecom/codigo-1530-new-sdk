@@ -436,7 +436,7 @@ const loadLiquid = async () => {
 // PRODUCT Event Listener
 window.addEventListener('products', function (e) {
     const products = getState('products');
-    carouselNumItems = products.length;
+    carouselNumItems = products.length || 2;
     products.forEach(product => carouselCard(product));
 
     const groupingId = getState('grouping_id');
