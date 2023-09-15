@@ -28,6 +28,19 @@ addressModalBg.onclick = () => {
 const addressInput = document.querySelector('#address-input');
 const addressOptions = [...document.querySelectorAll('.address-option')];
 
+const isAddressValid = (address) => {
+
+    return (
+        address?.streetNumber &&
+        address?.address1 &&
+        address?.zipCode &&
+        address?.latitude &&
+        address?.longitude &&
+        address?.state &&
+        address?.zipCode
+    )
+}
+
 const address = getState('address');
 if (address) {
     addressInput.value = address.description;
@@ -45,7 +58,7 @@ addressInput.oninput = async (e) => {
 
             const addressSearch = e.target.value;
             if (addressSearch.trim()) {
-                if(!window.liquid){
+                if (!window.liquid) {
                     await setLiquid();
                 }
                 const addressSuggestions = await liquid.address({ search: addressSearch });
@@ -77,15 +90,32 @@ addressOptions.forEach(addressOption => {
 
         const addressDescription = addressOption.innerText;
         const addressPlaceId = addressOption.id;
-        setState({
-            name: 'address',
-            value: {
-                description: addressDescription,
-                placeId: addressPlaceId
-            }
-        });
 
-        setState({ name: 'cart', value: null });
+        const addressObj = await liquid.address({ placeId: addressPlaceId });
+
+        if (isAddressValid(addressObj)) {
+            setState({
+                name: 'address',
+                value: {
+                    description: addressDescription,
+                    placeId: addressPlaceId
+                }
+            });
+
+            setState({ name: 'cart', value: null });
+        } else {
+
+            // Address is invalid
+           const addressHeader = document.querySelector('#popup-modal h4');
+           addressHeader.innerText = 'Address is missing street number';
+           addressHeader.style.color = 'brown';
+
+           setTimeout(()=>{
+            addressHeader.innerText = 'Enter your delivery address';
+            addressHeader.style.color = 'black';
+            addressHeader.value = '';
+           }, 2000);
+        }
     }
 });
 
@@ -98,30 +128,30 @@ window.addEventListener('address', async function (e) {
 
     let addressObj = null;
 
-    if(address?.placeId){
-        if(!window.liquid){
+    if (address?.placeId) {
+        if (!window.liquid) {
             await setLiquid();
         }
         addressObj = await liquid.address({ placeId: address?.placeId });
     }
     const groupingIds = getState('grouping_ids');
 
-    if(groupingIds){
-        if(!window.liquid){
+    if (groupingIds) {
+        if (!window.liquid) {
             await setLiquid();
         }
 
         const products = await liquid.product({
             ids: groupingIds,
-            ...(addressObj && {latitude: addressObj?.latitude}),
-            ...(addressObj && {longitude: addressObj?.longitude})
+            ...(addressObj && { latitude: addressObj?.latitude }),
+            ...(addressObj && { longitude: addressObj?.longitude })
         });
-    
+
         setState({ name: 'products', value: products || null });
     }
     addressOptions.forEach(el => el.classList.remove('visible'));
 
-    if(addressObj){
+    if (addressObj) {
         closeAddressModal();
     }
 });
