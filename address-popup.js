@@ -6,6 +6,19 @@ const addressModalBg = document.querySelector('#popup-background');
 
 const closeAddressModal = () => {
     addressModal.classList.remove('active');
+
+    const address = getState('address');
+
+    if(!address){
+        // set default address
+        setState({
+            name: 'address',
+            value: {
+                "description": "120 Nassau St, Brooklyn, NY 11201, USA",
+                "placeId": "ChIJGz_5rjVawokRz7nKEpkWXnM"
+            }
+        });
+    }
 }
 
 const openAddressModal = () => {
