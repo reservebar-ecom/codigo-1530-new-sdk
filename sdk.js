@@ -64,7 +64,8 @@ const groups = {
                 "GROUPING-1947546",
                 "GROUPING-1978934",
                 "GROUPING-1981432",
-                "GROUPING-2055467"
+                "GROUPING-2055467",
+                "GROUPING-2297417"
             ]
     },
     special_editions: {
@@ -103,6 +104,7 @@ const groups = {
             "GROUPING-1978934",
             "GROUPING-1981432",
             "GROUPING-2055467",
+            "GROUPING-2297417",
             "GROUPING-1778478",
             "GROUPING-1293186",
             "GROUPING-1569334",
