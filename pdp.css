@@ -331,7 +331,7 @@ button {
    content: "+";
    display: block;
    position: absolute;
-   top: -20px;
+   top: -30px;
    left: 50%;
    transform: translateX(-50%);
    font-size: 32px;
