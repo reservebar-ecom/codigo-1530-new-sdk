@@ -85,7 +85,8 @@ const quantitySelectorHTML = ({ product, variantId, isActive }) => {
     const customerPlacement = variant.customerPlacement;
     const isBackOrder = customerPlacement == "backOrder";
     const backOrderQty = isBackOrder ? 12 : 0;
-    const qty = Math.max(backOrderQty, inStockQuantity);
+    const bundleQty = Math.min(...variants.map(variant => variant.inStock));
+    const qty = product.bundleConfigs ? Math.max(backOrderQty, bundleQty) : Math.max(backOrderQty, inStockQuantity);
 
     return `
     <select class="qty-selector uk-button ${isActive && 'enabled'}" variant-id="${variantId}" customer-placement="${customerPlacement}">
@@ -157,50 +158,90 @@ const renderPDP = (product) => {
 
         const engravingInputs = engravingElement.querySelectorAll('input[type="text"]');
 
-        document.querySelector('#variants').innerHTML = variants.map((variant, index) => {
-            let variantRetailers = getVariantRetailers(variant);
+        if(product?.bundleConfigs) {
 
-            return `
-                  <div class="variant ${index == 0 && 'enabled'}" size="${variant.size}">
-                    ${variantRetailers.map((variant, i) => {
-                if (i == 0 && index == 0 && variant.type == 'engraved') {
-                    engravingElement.classList.add('active');
-
-                    // Show only the correspoding number of engraving lines
-                    const numOfEngravingLines = product.variants[0].engravingConfigs.lines;
-                    [...engravingInputs].forEach((engravingInput, num) => {
-                        if (num >= numOfEngravingLines) {
-                            engravingInput.style.display = 'none';
-                        }
-                    });
-                }
-
+            document.querySelector('#variants').innerHTML = variants.map((variant, index) => {
+                let variantRetailers = getVariantRetailers(variant);
+                const name = variant.name;
+    
                 return `
-                    <div class="variant-option ${index == 0 && i == 0 ? 'selected' : ''}">
-                        <div style="width:100%">
-                        <div class="retailer-type-and-price">
-                            <div class="retailer-type">
-                            <h5>${typeMap[variant.type]}</h5>
-                            ${variant.type == 'engraved' ? '<span class="engraving-badge">engraving</span>' : ''}
+                      <div class="variant enabled bundle" size="${variant.size}">
+                        ${variantRetailers.map((variant, i) => {
+                 
+                    return `
+                        <div class="variant-option bundle-selected">
+                            <div style="width:100%">
+                            <div class="retailer-type-and-price">
+                                <div class="retailer-type">
+                                <h5>${typeMap[variant.type]}</h5>
+                                </div>
+                                <span>${formatter.format(variant.price)}</span>
                             </div>
-                            <span>${formatter.format(variant.price)}</span>
+                                <input class="variant-id" name="variant-${index}" type="radio" in-stock="${variant.inStock}" value="${variant.variantId}" id="${variant.variantId}" engraving="${variant.type == 'engraved'}" ${i == 0 ? 'checked' : ''}/>
+                                <label class="retailer-name" for="${variant.variantId}">
+                                    ${name}
+                                </label>
+                                <p class="retailer-delivery-expectation">
+                                    <small>${variant.shippingMethod.desc.expected}</small>
+                                </p>
+                            </div>
                         </div>
-                            <input class="variant-id" name="variant-${index}" type="radio" value="${variant.variantId}" id="${variant.variantId}" engraving="${variant.type == 'engraved'}" ${i == 0 ? 'checked' : ''}/>
-                            <label class="retailer-name" for="${variant.variantId}">
-                                ${variant.retailer.name}
-                            </label>
-                            <p class="retailer-delivery-expectation">
-                                <small>${variant.shippingMethod.desc.expected}</small>
-                            </p>
-                            ${variant.type == 'engraved' ? '<span class="engraving-badge-mobile">engraving</span>' : ''}
+                `}
+                ).join('')
+                    }
+                      </div>
+                      `}
+            ).join('');
+
+
+
+        } else{
+            document.querySelector('#variants').innerHTML = variants.map((variant, index) => {
+                let variantRetailers = getVariantRetailers(variant);
+    
+                return `
+                      <div class="variant ${index == 0 && 'enabled'}" size="${variant.size}">
+                        ${variantRetailers.map((variant, i) => {
+                    if (i == 0 && index == 0 && variant.type == 'engraved') {
+                        engravingElement.classList.add('active');
+    
+                        // Show only the correspoding number of engraving lines
+                        const numOfEngravingLines = product.variants[0].engravingConfigs.lines;
+                        [...engravingInputs].forEach((engravingInput, num) => {
+                            if (num >= numOfEngravingLines) {
+                                engravingInput.style.display = 'none';
+                            }
+                        });
+                    }
+    
+                    return `
+                        <div class="variant-option ${index == 0 && i == 0 ? 'selected' : ''}">
+                            <div style="width:100%">
+                            <div class="retailer-type-and-price">
+                                <div class="retailer-type">
+                                <h5>${typeMap[variant.type]}</h5>
+                                ${variant.type == 'engraved' ? '<span class="engraving-badge">engraving</span>' : ''}
+                                </div>
+                                <span>${formatter.format(variant.price)}</span>
+                            </div>
+                                <input class="variant-id" name="variant-${index}" type="radio" value="${variant.variantId}" id="${variant.variantId}" engraving="${variant.type == 'engraved'}" ${i == 0 ? 'checked' : ''}/>
+                                <label class="retailer-name" for="${variant.variantId}">
+                                    ${variant.retailer.name}
+                                </label>
+                                <p class="retailer-delivery-expectation">
+                                    <small>${variant.shippingMethod.desc.expected}</small>
+                                </p>
+                                ${variant.type == 'engraved' ? '<span class="engraving-badge-mobile">engraving</span>' : ''}
+                            </div>
                         </div>
-                    </div>
-            `}
-            ).join('')
-                }
-                  </div>
-                  `}
-        ).join('');
+                `}
+                ).join('')
+                    }
+                      </div>
+                      `}
+            ).join('');
+        }
+
 
         document.querySelector('#product-description').innerHTML = product.descriptionHtml;
         document.querySelector('#product-name').innerText = product.name;
@@ -265,7 +306,6 @@ const renderPDP = (product) => {
 
         // Show or hide engraving for first variant
         const productRetailer = productVariant?.retailers?.find(e => !!e);
-        const hasEngraving = productRetailer?.type == 'engraved';
 
         // On variant id block click
         const variantIdBlocks = [...document.querySelectorAll('.variant-option')];
@@ -324,18 +364,21 @@ const addToCart = async () => {
     const retailerOption = document.querySelector('div.variant.enabled');
     if (retailerOption) {
         let cart = getState('cart');
+        const checkedOptions = document.querySelectorAll('#variants input:checked');
 
-        const variantId = retailerOption.querySelector('input:checked').value;
-        const cartItem = cart?.cartItems?.find(e => e.product.id == variantId);
-        const previousQuantity = parseInt(cartItem?.quantity || 0);
-        const maxQuantity = parseInt(cartItem?.product?.inStock || 1000);
-        const qtySelector = document.querySelector(`select.qty-selector.enabled`);
-        const addedQuantity = parseInt(qtySelector.value);
-            
-        const customerPlacement = customerPlacementMap[qtySelector.getAttribute('customer-placement')];
-        const quantity = Math.min(addedQuantity + previousQuantity, maxQuantity);
-        const options = document.querySelector('#engraving-checkbox').checked && getState('engraving');
-        await updateCartItem({ variantId, quantity, options, customerPlacement });
+        for (const checkedOption of    [...checkedOptions]) {
+            const variantId = checkedOption.value;
+            const cartItem = cart?.cartItems?.find(e => e.product.id == variantId);
+            const previousQuantity = parseInt(cartItem?.quantity || 0);
+            const maxQuantity = parseInt(cartItem?.product?.inStock || 1000);
+            const qtySelector = document.querySelector(`select.qty-selector.enabled`);
+            const addedQuantity = parseInt(qtySelector.value);
+
+            const customerPlacement = customerPlacementMap[qtySelector.getAttribute('customer-placement')];
+            const quantity = Math.min(addedQuantity + previousQuantity, maxQuantity);
+            const options = document.querySelector('#engraving-checkbox').checked && getState('engraving');
+            await updateCartItem({ variantId, quantity, options, customerPlacement });
+        }
     }
     hideLoader();
 }

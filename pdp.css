@@ -321,6 +321,29 @@ button {
    backdrop-filter: brightness(100%) blur(2px);
 }
 
+.bundle-selected {
+   position: relative;
+   background-color: #f1f2f3;
+   border-bottom: 1px solid #FFF !important;
+}
+
+.bundle::after {
+   content: "+";
+   display: block;
+   position: absolute;
+   top: -20px;
+   left: 50%;
+   transform: translateX(-50%);
+   font-size: 32px;
+}
+
+.bundle {
+   position: relative;
+}
+
+#variants .bundle:first-child::after {
+   content: "";
+}
 
 /* ENGRAVING */
 
